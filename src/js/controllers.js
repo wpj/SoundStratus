@@ -1,13 +1,37 @@
 angular.module('app.controllers', [])
-.controller('MainCtrl', ['$scope', '$http', 'tokenHandler', '$auth', function($scope, $http, tokenHandler, $auth) {
+.controller('MainCtrl', ['$scope', '$http', '$auth', 'Account', '$state', function($scope, $http, $auth, Account, $state) {
 
   $scope.login = function() {
-    $auth.authenticate('soundcloud')
+    return $auth.authenticate('soundcloud')
       .then(function(response) {
-        console.log("Response:", response);
+        $scope.getProfile()
+        .then(function() { $state.go('trending'); });
       })
       .catch(function(response) {
         console.log("Error:", response);
+      });
+  };
+
+  $scope.logout = function() {
+    return $auth.logout()
+      .then(function() {
+        $scope.user = null;
+        $state.go('login');
+      });
+  };
+
+  $scope.isAuthenticated = function() {
+    return $auth.isAuthenticated();
+  };
+
+  $scope.getProfile = function() {
+    return Account.get()
+      .then(function(response) {
+        $scope.user = response.data;
+        return $scope.user;
+      })
+      .catch(function(error) {
+        return console.log(error);
       });
   };
 
@@ -17,8 +41,7 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('NavCtrl', ['$scope', '$state', 'Soundcloud', function($scope, $state, Soundcloud) {
-  $scope.messages = {};
+.controller('NavCtrl', ['$rootScope', '$scope', '$state', 'Soundcloud', function($rootScope, $scope, $state, Soundcloud) {
 
   $state.go('trending.week');
 
@@ -26,36 +49,35 @@ angular.module('app.controllers', [])
     return tab === $state.current.name;
   };
 
-  $scope.clearMessages = function() {
-    $scope.messages = {};
-  };
-
   $scope.$on('data:notFound', function() {
-    $scope.messages.noDataFound = true;
+    $rootScope.messages.noDataFound = true;
   });
 
   $scope.$on('data:follow', function() {
-    $scope.messages.follow = true;
+    $rootScope.messages.follow = true;
   });
 
   $scope.$on('data:error', function(evt, error) {
     console.log(error);
-    $scope.messages.error = error.data.errors;
+    $rootScope.messages.error = error.data.errors;
   });
 }])
 
 .controller('TrendingCtrl', ['$scope', 'Soundcloud', 'timeframe', '$state', function($scope, Soundcloud, timeframe, $state) {
-  // Soundcloud.parseUser('yit_j', timeframe.time)
-  //   .then(function(songs) {
-  //     $scope.songs = songs;
-  //     if (!songs.length) {
-  //       $scope.$emit('data:notFound');
-  //     } else if (songs.length < 10) {
-  //       $scope.$emit('data:follow');
-  //     }
-  //   })
-  //   .catch(function(err) {
-  //     if (err) $scope.$emit('data:error', err);
-  //   });
+
+  $scope.getProfile().then(function(user) {
+    Soundcloud.parseUser(user.uid, timeframe.time)
+    .then(function(songs) {
+      $scope.songs = songs;
+      if (!songs.length) {
+        $scope.$emit('data:notFound');
+      } else if (songs.length < 10) {
+        $scope.$emit('data:follow');
+      }
+    })
+    .catch(function(err) {
+      if (err) $scope.$emit('data:error', err);
+    });
+  });
 
 }]);
