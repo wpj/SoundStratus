@@ -1,6 +1,6 @@
 <ul class="list-unstyled">
   <li ng-show="processing">
-    <h1 class="text-center"><i ng-show="processing" class="fa fa-spinner fa-spin"></i></h1>
+    <h1 class="text-center"><i ng-hide="songs" class="fa fa-spinner fa-spin"></i></h1>
   </li>
   <li ng-repeat="song in songs | limitTo: 10">
     <soundcloud-widget song-id="{{song.id}}"></soundcloud-widget>
