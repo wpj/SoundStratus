@@ -65,19 +65,41 @@ angular.module('app.controllers', [])
 
 .controller('TrendingCtrl', ['$scope', 'Soundcloud', 'timeframe', '$state', function($scope, Soundcloud, timeframe, $state) {
 
-  $scope.getProfile().then(function(user) {
-    Soundcloud.parseUser(user.uid, timeframe.time)
-    .then(function(songs) {
-      $scope.songs = songs;
-      if (!songs.length) {
-        $scope.$emit('data:notFound');
-      } else if (songs.length < 10) {
-        $scope.$emit('data:follow');
+  // $scope.getProfile().then(function(user) {
+  //   Soundcloud.parseUser(user.uid, timeframe.time)
+  //   .then(function(songs) {
+  //     console.log(songs);
+  //     $scope.songs = songs;
+  //     if (!songs.length) {
+  //       $scope.$emit('data:notFound');
+  //     } else if (songs.length < 10) {
+  //       $scope.$emit('data:follow');
+  //     }
+  //   })
+  //   .catch(function(err) {
+  //     if (err) $scope.$emit('data:error', err);
+  //   });
+  // });
+
+  $scope.songs = [
+    {
+      "id": 168192066,
+      "title": "Coronus, The Terminator",
+      "permalink_url": "http://soundcloud.com/flyinglotus/coronus-the-terminator",
+      "user": {
+        "username": "Flyinglotus",
+        "permalink_url": "http://soundcloud.com/flyinglotus"
       }
-    })
-    .catch(function(err) {
-      if (err) $scope.$emit('data:error', err);
-    });
-  });
+    },
+    {
+      "id": 168479631,
+      "title": "SBTRKT - THE LIGHT ft Denai Moore",
+      "permalink_url": "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore",
+      "user": {
+        "username": "SBTRKT",
+        "permalink_url": "http://soundcloud.com/sbtrkt"
+      }
+    }
+  ];
 
 }]);
