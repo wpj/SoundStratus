@@ -9,7 +9,7 @@ var jwt        = require('jwt-simple');
 var moment     = require('moment');
 var mongoose   = require('mongoose');
 var request    = require('request');
-var q          = require('bluebird');
+
 
 var config     = require('./config');
 
