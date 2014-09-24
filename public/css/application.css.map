@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAEA,CAAE;EAEA,WAAW,EAAE,SAAS;;AAGxB,eAAgB;ECsEU,aAAU,EApD9B,GAAyC",
-"sources": ["../application.scss","../../../../../../../Users/wyatt/code/projects/node-cirrus/src/styles/bourbon/addons/_directional-values.scss"],
-"names": [],
-"file": "application.css"
-}
