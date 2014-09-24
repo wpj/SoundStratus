@@ -3,6 +3,20 @@
     <h1 class="text-center"><i ng-hide="songs" class="fa fa-spinner fa-spin"></i></h1>
   </li>
   <li ng-repeat="song in songs | limitTo: 10">
-    <soundcloud-widget song-id="{{song.id}}"></soundcloud-widget>
+    <div class="audio-widget" plangular="{{ song.permalink_url }}">
+      <div>
+        <h4><a target="_blank" href="{{song.user.permalink_url}}">{{song.user.username}}</a> - <a target="_blank" href="{{song.permalink_url}}">{{ song.title }}</a></h4>
+      </div>
+
+      <button class="btn" ng-click="playPause()">
+        <i ng-if="player.playing !== track" class="fa fa-play"></i>
+        <i ng-if="player.playing === track" class="fa fa-pause"></i>
+      </button>
+
+      <progress value="{{ currentTime / duration || 0 }}"
+        ng-click="seek($event)">
+        {{ currentTime / duration }}
+      </progress>
+    </div>
   </li>
 </ul>
