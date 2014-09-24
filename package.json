@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node server.js",
     "postInstall": "bower install && gulp build"
-  }
+  },
   "dependencies": {
     "bcryptjs": "^0.7.12",
     "bluebird": "^2.3.2",
