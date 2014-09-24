@@ -76,17 +76,10 @@ angular.module('app.services', [])
   };
 }])
 
-.factory('tokenHandler', ['$rootScope', '$http', '$q', '$state', function($rootScope, $http, $q, $state) {
-  var token = null,
-      currentUser;
-
+.factory('Account', ['$http', function($http) {
   return {
-    set: function(value) { token = value; },
     get: function() {
-      if (!token)
-        $rootScope.$broadcast('auth:unauthorized');
-      else
-        return token;
+      return $http.get('/api/me');
     }
   };
 }]);

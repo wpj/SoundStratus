@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class=""><i class="fa fa-headphones"></i> Trending songs</h2>
+  <h2 class=""><i class="fa fa-headphones"></i> Trending songs <span ng-show="user">for {{user.username}}</span></h2>
 
   <ul class="nav nav-pills trending-nav">
     <li ng-class="{active: activeTab('trending.today')}"><a ng-click="clearMessages()" ui-sref=".today">Today</a></li>
