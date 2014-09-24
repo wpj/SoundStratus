@@ -1,6 +1,9 @@
 {
   "name": "soundcloud-cirrus",
   "main": "server.js",
+  "scripts": {
+    "postInstall": "bower install && gulp build"
+  }
   "dependencies": {
     "bcryptjs": "^0.7.12",
     "bluebird": "^2.3.2",
@@ -11,10 +14,7 @@
     "moment": "^2.8.1",
     "mongoose": "^3.8.14",
     "morgan": "^1.2.2",
-    "request": "^2.40.0"
-  },
-  "devDependencies": {
-    "browser-sync": "^1.5.1",
+    "request": "^2.40.0",
     "gulp": "^3.8.8",
     "gulp-angular-templatecache": "^1.4.1",
     "gulp-concat": "^2.4.1",
@@ -24,5 +24,8 @@
     "gulp-sourcemaps": "^1.2.2",
     "gulp-uglify": "^1.0.1",
     "main-bower-files": "^2.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.5.1"
   }
 }
