@@ -2,18 +2,28 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider
+    .state('home', {
+      url: '/',
+      template: '<h1>Welcome to Cirrus Sounds</h1>'
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'login.html',
-      controller: 'AuthCtrl'
+      controller: 'AuthCtrl',
+      onEnter: ['$state', '$auth', function($state, $auth) {
+        if ($auth.isAuthenticated()) { $state.go('trending'); }
+      }]
     })
     .state('trending', {
-      url: '/',
+      url: '/popular',
       templateUrl: 'trending.html',
-      controller: 'NavCtrl'
+      controller: 'NavCtrl',
+      onEnter: ['$state', '$auth', function($state, $auth) {
+        if (!$auth.isAuthenticated()) { $state.go('login'); }
+      }]
     })
     .state('trending.today', {
-      url: 'today',
+      url: '/today',
       templateUrl: 'trending-list.html',
       controller: 'TrendingCtrl',
       resolve: {
@@ -23,7 +33,7 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
       }
     })
     .state('trending.week', {
-      url: 'this-week',
+      url: '/this-week',
       templateUrl: 'trending-list.html',
       controller: 'TrendingCtrl',
       resolve: {
@@ -33,7 +43,7 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
       }
     })
     .state('trending.month', {
-      url: 'this-month',
+      url: '/this-month',
       templateUrl: 'trending-list.html',
       controller: 'TrendingCtrl',
       resolve: {
@@ -43,7 +53,7 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
       }
     })
     .state('trending.allTime', {
-      url: 'all-time',
+      url: '/all-time',
       templateUrl: 'trending-list.html',
       controller: 'TrendingCtrl',
       resolve: {
@@ -53,7 +63,7 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
       }
     });
 
-  $urlRouterProvider.otherwise('/');
+  // $urlRouterProvider.otherwise('/');
 }])
 
 .config(['$authProvider', 'clientId', function($authProvider, clientId) {
@@ -66,22 +76,18 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
     authorizationEndpoint: 'https://soundcloud.com/connect'
   });
 
-  $authProvider.oauth2({
-    name: 'foursquare',
-    url: '/auth/foursquare',
-    clientId: 'HXZHJJQ5YBDB3EHTDKDLWOLNWKW12X4E3XOTN302TUSTFHTN',
-    redirectUri: window.location.origin,
-    authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
-  });
+}])
 
+.run(['$rootScope', function($rootScope) {
+  $rootScope.messages = {};
+
+  $rootScope.$on('$stateChangeSuccess', function(evt) {
+    $rootScope.messages = {};
+  });
 }])
 
 .run(['clientId', function(clientId) {
   SC.initialize({
     client_id: clientId
   });
-}])
-
-.run(['$sce', function($sce) {
-  $sce.trustAsResourceUrl('i2.sndcdn.com');
 }]);

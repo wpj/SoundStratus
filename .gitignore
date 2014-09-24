@@ -27,3 +27,5 @@ node_modules
 public
 bower_components
 .sass-cache
+
+config.js
