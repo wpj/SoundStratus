@@ -47,11 +47,12 @@
 		<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
 		  <div class="container-fluid">
 		    <div class="navbar-header pull-left">
-		      <a class="navbar-brand" href="/">Cirrus Sounds</a>
+		      <a class="navbar-brand" ui-sref="home">Cirrus Sounds</a>
 		    </div>
 
 		    <div class="navbar-header pull-right">
-	        <button ng-click="login()" type="button" class="btn btn-default navbar-btn"><i class="fa fa-soundcloud"></i> Sign in</button>
+	        <button ng-hide="isAuthenticated()" ng-click="login()" type="button" class="btn btn-default navbar-btn"><i class="fa fa-soundcloud"></i> Sign in</button>
+	        <button ng-show="isAuthenticated()" ng-click="logout()" class="btn btn-default navbar-btn">Sign out <i class="fa fa-sign-out"></i></button>
 		    </div>
 		  </div><!-- /.container-fluid -->
 		</nav>
