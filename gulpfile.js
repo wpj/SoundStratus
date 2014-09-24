@@ -1,7 +1,10 @@
 var gulp          = require('gulp');
 var concat        = require('gulp-concat');
 var sass          = require('gulp-ruby-sass');
-var browserSync   = require('browser-sync');
+
+if (process.env.NODE_ENV === "production")
+  var browserSync   = require('browser-sync');
+
 var reload        = browserSync.reload;
 var uglify        = require('gulp-uglify');
 var minifyCSS     = require('gulp-minify-css');
