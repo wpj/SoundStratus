@@ -3,7 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "postInstall": "./node_modules/bower/bin/bower install"
+    "postInstall": "bower install && gulp build"
   },
   "dependencies": {
     "bcryptjs": "^0.7.12",
