@@ -1,20 +1,22 @@
-var path = require('path');
-var qs = require('querystring');
+var path       = require('path');
+var qs         = require('querystring');
 
-var bcrypt = require('bcryptjs');
+var bcrypt     = require('bcryptjs');
 var bodyParser = require('body-parser');
-var express = require('express');
-var logger = require('morgan');
-var jwt = require('jwt-simple');
-var moment = require('moment');
-var mongoose = require('mongoose');
-var request = require('request');
+var express    = require('express');
+var logger     = require('morgan');
+var jwt        = require('jwt-simple');
+var moment     = require('moment');
+var mongoose   = require('mongoose');
+var request    = require('request');
+var q          = require('bluebird');
 
-var config = require('./config');
+var config     = require('./config');
 
 var userSchema = new mongoose.Schema({
   username: String,
-  uid: {type: String, index: true}
+  uid: {type: String, index: true},
+  auth_token: String
 });
 
 var User = mongoose.model('User', userSchema);
