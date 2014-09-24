@@ -1,0 +1,5 @@
+<ul class="list-unstyled">
+  <li ng-repeat="song in songs | limitTo: 10">
+    <soundcloud-widget song-id="{{song.id}}"></soundcloud-widget>
+  </li>
+</ul>

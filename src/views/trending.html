@@ -1,0 +1,23 @@
+<div class="container">
+  <h2 class=""><i class="fa fa-headphones"></i> Trending songs</h2>
+
+  <ul class="nav nav-pills trending-nav">
+    <li ng-class="{active: activeTab('trending.today')}"><a ng-click="clearMessages()" ui-sref=".today">Today</a></li>
+    <li ng-class="{active: activeTab('trending.week')}"><a ng-click="clearMessages()" ui-sref=".week">This week</a></li>
+    <li ng-class="{active: activeTab('trending.month')}"><a ng-click="clearMessages()" ui-sref=".month">This month</a></li>
+    <li ng-class="{active: activeTab('trending.allTime')}"><a ng-click="clearMessages()" ui-sref=".allTime">All time</a></li>
+  </ul>
+
+  <div ng-show="messages.error" class="alert alert-danger" role="alert">
+    <i class="fa fa-exclamation-triangle"></i> {{ messages.error }}
+  </div>
+  <div ng-show="messages.follow" class="alert alert-info" role="alert">
+    <i class="fa fa-info-circle"></i> Follow more people on Soundcloud to get a more filled out trending list!
+  </div>
+  <div ng-show="messages.noDataFound" class="alert alert-warning" role="alert">
+    <i class="fa fa-info-circle"></i> No data found! Follow more people on Soundcloud to fix that!
+  </div>
+
+  <div ui-view></div>
+
+</div>

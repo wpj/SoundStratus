@@ -1,0 +1,6 @@
+module.exports = {
+  TOKEN_SECRET: process.env.TOKEN_SECRET || 'A hard to guess string',
+  MONGO_URI: process.env.MONGO_URI || 'localhost',
+  FOURSQUARE_SECRET: process.env.FOURSQUARE_SECRET || 'N3QNYSBNEJJW104OE0VFTTELVXE3QVZKOUUA23R35ZOCF21C',
+  SOUNDCLOUD_SECRET: process.env.SOUNDCLOUD_SECRET || '167f02d311d4db5dded7ac22052deb56'
+};
