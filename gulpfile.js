@@ -1,12 +1,8 @@
 var gulp          = require('gulp');
 var concat        = require('gulp-concat');
 var sass          = require('gulp-ruby-sass');
-
-if (process.env.NODE_ENV === "production") {
-  var browserSync   = require('browser-sync');
-  var reload        = browserSync.reload;
-}
-
+var browserSync   = require('browser-sync');
+var reload        = browserSync.reload;
 var uglify        = require('gulp-uglify');
 var minifyCSS     = require('gulp-minify-css');
 var htmlMin       = require('gulp-htmlmin');
@@ -31,8 +27,8 @@ gulp.task('js', function() {
     // .pipe(concat('app.js'))
     // .pipe(uglify())
   // .pipe(sourcemaps.write())
-  .pipe(gulp.dest(dist.directory + 'js/'));
-  // .pipe(reload({stream: true}));
+  .pipe(gulp.dest(dist.directory + 'js/'))
+  .pipe(reload({stream: true}));
 });
 
 gulp.task('bower', function() {
@@ -41,8 +37,8 @@ gulp.task('bower', function() {
 });
 
 gulp.task('views', function() {
-  gulp.src('src/index.html').pipe(gulp.dest(dist.directory));
-  // .pipe(reload({stream: true}));
+  gulp.src('src/index.html').pipe(gulp.dest(dist.directory))
+  .pipe(reload({stream: true}));
 });
 
 gulp.task('ng-templates', function() {
@@ -52,8 +48,8 @@ gulp.task('ng-templates', function() {
     module: 'cirrusSounds'
   }))
   // .pipe(uglify())
-  .pipe(gulp.dest(dist.directory + 'js'));
-  // .pipe(reload({stream: true}));
+  .pipe(gulp.dest(dist.directory + 'js'))
+  .pipe(reload({stream: true}));
 });
 
 gulp.task('styles', function() {
@@ -62,8 +58,8 @@ gulp.task('styles', function() {
     onError: function(e) {console.log(e); }
   }))
   // .pipe(minifyCSS({keepBreaks: true}))
-  .pipe(gulp.dest(dist.directory + 'css/'));
-  // .pipe(reload({stream: true}));
+  .pipe(gulp.dest(dist.directory + 'css/'))
+  .pipe(reload({stream: true}));
 });
 
 gulp.task('img', function() {
