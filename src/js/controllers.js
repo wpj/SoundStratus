@@ -1,5 +1,5 @@
 angular.module('app.controllers', [])
-.controller('MainCtrl', ['$scope', '$http', '$auth', 'Account', '$state', function($scope, $http, $auth, Account, $state) {
+.controller('MainCtrl', ['$rootScope', '$scope', '$http', '$auth', 'Account', '$state', function($rootScope, $scope, $http, $auth, Account, $state) {
 
   $scope.login = function() {
     return $auth.authenticate('soundcloud')
@@ -7,8 +7,8 @@ angular.module('app.controllers', [])
         $scope.getProfile()
         .then(function() { $state.go('trending'); });
       })
-      .catch(function(response) {
-        console.log("Error:", response);
+      .catch(function(error) {
+        if (error) $rootScope.messages.error = error.data.errors;
       });
   };
 
@@ -31,7 +31,7 @@ angular.module('app.controllers', [])
         return $scope.user;
       })
       .catch(function(error) {
-        return console.log(error);
+        if (error) $rootScope.messages.error = error.data.errors;
       });
   };
 
@@ -65,41 +65,19 @@ angular.module('app.controllers', [])
 
 .controller('TrendingCtrl', ['$scope', 'Soundcloud', 'timeframe', '$state', function($scope, Soundcloud, timeframe, $state) {
 
-  // $scope.getProfile().then(function(user) {
-  //   Soundcloud.parseUser(user.uid, timeframe.time)
-  //   .then(function(songs) {
-  //     console.log(songs);
-  //     $scope.songs = songs;
-  //     if (!songs.length) {
-  //       $scope.$emit('data:notFound');
-  //     } else if (songs.length < 10) {
-  //       $scope.$emit('data:follow');
-  //     }
-  //   })
-  //   .catch(function(err) {
-  //     if (err) $scope.$emit('data:error', err);
-  //   });
-  // });
-
-  $scope.songs = [
-    {
-      "id": 168192066,
-      "title": "Coronus, The Terminator",
-      "permalink_url": "http://soundcloud.com/flyinglotus/coronus-the-terminator",
-      "user": {
-        "username": "Flyinglotus",
-        "permalink_url": "http://soundcloud.com/flyinglotus"
+  $scope.getProfile().then(function(user) {
+    Soundcloud.parseUser(user.uid, timeframe.time)
+    .then(function(songs) {
+      $scope.songs = songs;
+      if (!songs.length) {
+        $scope.$emit('data:notFound');
+      } else if (songs.length < 10) {
+        $scope.$emit('data:follow');
       }
-    },
-    {
-      "id": 168479631,
-      "title": "SBTRKT - THE LIGHT ft Denai Moore",
-      "permalink_url": "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore",
-      "user": {
-        "username": "SBTRKT",
-        "permalink_url": "http://soundcloud.com/sbtrkt"
-      }
-    }
-  ];
+    })
+    .catch(function(err) {
+      if (err) $scope.$emit('data:error', err);
+    });
+  });
 
 }]);
