@@ -7,12 +7,7 @@ $font-stack: "Raleway", "Verdana", "Lucida Grande", "Gill Sans", "Arial", "Helve
 }
 
 body {
-  // @include size(100%);
-  // @include linear-gradient(#fffdd0, shade(#fffdd0, 2%));
   @include linear-gradient(to right, #F2DBAE, shade(#F2DBAE, 1%));
-
-
-
   // @include linear-gradient(to right, #F7BB97, tint(#DD5E89, 30%));
   // @include linear-gradient(to right, #4CB8C4, shade(#3CD3AD, 15%));
   // @include linear-gradient(to right, #4CB8C4, #3CD3AD);

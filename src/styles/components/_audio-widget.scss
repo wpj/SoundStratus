@@ -112,15 +112,41 @@ ul.popular-list {
     width: 100%;
     height: em(18);
     vertical-align: bottom;
+    border: none;
     @include linear-gradient(to right, #95a5a6, #7f8c8d);
 
     &[value]::-webkit-progress-value {
+      background-color: #4CB8C4;
+      @include linear-gradient(to left, #4CB8C4, #3CD3AD);
       // @include linear-gradient(to right, #F09819, #FF512F);
-      // @include linear-gradient(to right, #4CB8C4, #3CD3AD);
       // @include linear-gradient(to right, #F7BB97, #DD5E89);
-      // @include linear-gradient(to right, #71B280, #134E5E);
-      // @include linear-gradient(to right, #00d2ff, #3a7bd5);
+    }
+
+    &[value]::-moz-progress-bar {
+      background-color: #4CB8C4;
+      @include linear-gradient(to left, #4CB8C4, #3CD3AD);
+    }
+
+    &[value] {
+      background-color: #4CB8C4;
+      @include linear-gradient(to left, #4CB8C4, #3CD3AD);
+    }
+  }
+
+  .progress-fallback {
+    // @extend progress;
+    cursor: pointer;
+    width: 100%;
+    height: em(18);
+    vertical-align: bottom;
+    border: none;
+    @include linear-gradient(to right, #95a5a6, #7f8c8d);
+    @include position(relative);
+
+    >div {
+      @include position(absolute, 0 null 0 0);
       @include linear-gradient(to right, #606c88, #3f4c6b);
+      display: block;
     }
   }
 
