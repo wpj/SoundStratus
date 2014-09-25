@@ -8,10 +8,8 @@
       <div class="audio-widget" plangular="{{ song.permalink_url }}">
         
         <div class="player-controls">
-          <button class="btn" ng-click="playPause()">
-            <i ng-if="player.playing !== track" class="fa fa-play"></i>
-            <i ng-if="player.playing === track" class="fa fa-pause"></i>
-          </button>
+          <button ng-if="player.playing !== track" ng-click="play()" class="btn"><i class="fa fa-play"></i></button>
+          <button ng-if="player.playing === track" ng-click="pause()" class="btn"><i class="fa fa-pause"></i></button>
         </div>
                 
         <div class="song-info">
