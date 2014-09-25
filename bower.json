@@ -20,7 +20,6 @@
     "angular-ui-router": "~0.2.11",
     "angular-animate": "~1.2.24",
     "lodash": "~2.4.1",
-    "angular-bootstrap": "~0.11.0",
     "bootstrap": "~3.2.0",
     "satellizer": "~0.6.4",
     "plangular": "jxnblk/plangular"
@@ -36,10 +35,16 @@
       "main": "ng-plangular.min.js"
     },
     "angular-animate": {
-      "main": ["angular-animate.js", "angular-animate.min.js"]
+      "main": [
+        "angular-animate.js",
+        "angular-animate.min.js"
+      ]
     },
     "satellizer": {
-      "main": ["satellizer.js", "satellizer.min.js"]
+      "main": [
+        "satellizer.js",
+        "satellizer.min.js"
+      ]
     }
   }
 }
