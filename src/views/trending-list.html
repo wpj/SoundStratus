@@ -22,7 +22,7 @@
           <h5>
             <a target="_blank" href="{{song.permalink_url}}">{{ song.title }}</a>
           </h5>
-          <progress value="{{ currentTime / duration || 0 }}"
+          <progress ng-show="player.playing === track" value="{{ currentTime / duration || 0 }}"
             ng-click="seek($event)">
             {{ currentTime / duration }}
           </progress>
