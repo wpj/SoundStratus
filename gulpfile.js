@@ -28,8 +28,8 @@ gulp.task('browser-sync', function() {
 gulp.task('js', function() {
   gulp.src(['src/js/**/*'])
   // .pipe(sourcemaps.init())
-    // .pipe(concat('app.js'))
-    // .pipe(uglify())
+    .pipe(concat('app.js'))
+    .pipe(uglify())
   // .pipe(sourcemaps.write())
   .pipe(gulp.dest(dist.directory + 'js/'))
   .pipe(reload({stream: true}));
@@ -51,7 +51,7 @@ gulp.task('ng-templates', function() {
   .pipe(templateCache({
     module: 'cirrusSounds'
   }))
-  // .pipe(uglify())
+  .pipe(uglify())
   .pipe(gulp.dest(dist.directory + 'js'))
   .pipe(reload({stream: true}));
 });
@@ -61,7 +61,7 @@ gulp.task('styles', function() {
   .pipe(sass({
     onError: function(e) {console.log(e); }
   }))
-  // .pipe(minifyCSS({keepBreaks: true}))
+  .pipe(minifyCSS({keepBreaks: true}))
   .pipe(gulp.dest(dist.directory + 'css/'))
   .pipe(reload({stream: true}));
 });

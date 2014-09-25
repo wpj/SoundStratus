@@ -33,7 +33,13 @@
       "main": "modernizr.js"
     },
     "plangular": {
-      "main": "ng-plangular.js"
+      "main": "ng-plangular.min.js"
+    },
+    "angular-animate": {
+      "main": ["angular-animate.js", "angular-animate.min.js"]
+    },
+    "satellizer": {
+      "main": ["satellizer.js", "satellizer.min.js"]
     }
   }
 }

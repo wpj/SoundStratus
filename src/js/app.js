@@ -84,10 +84,4 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
   $rootScope.$on('$stateChangeSuccess', function(evt) {
     $rootScope.messages = {};
   });
-}])
-
-.run(['clientId', function(clientId) {
-  SC.initialize({
-    client_id: clientId
-  });
 }]);
