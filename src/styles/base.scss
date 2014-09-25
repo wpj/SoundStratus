@@ -52,3 +52,12 @@ button.login-button {
     }
   }
 }
+
+.user-feedback {
+  em {
+    font-style: italic;
+    cursor: pointer;
+    margin-left: 0.8em;
+    color: rgba(0,0,0,0.5);
+  }
+}

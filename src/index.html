@@ -53,14 +53,20 @@
 		</nav>
 
 		<div class="container">
-			<div ng-show="messages.error" class="alert alert-danger" role="alert" ng-click="clearMessages()">
-	      <i class="fa fa-exclamation-triangle"></i> There was an issue when connecting to Soundcloud, please refresh the page to try again
+			<div ng-show="messages.error" class="user-feedback alert alert-danger" role="alert">
+	      <i class="fa fa-exclamation-triangle"></i>
+	      <span>There was an issue when connecting to Soundcloud, please refresh the page to try again</span>
+	      <em ng-click="clearMessages()">click to close</em>
 	    </div>
-	    <div ng-show="messages.follow" class="alert alert-info" role="alert" ng-click="clearMessages()">
-	      <i class="fa fa-info-circle"></i> Follow more people on Soundcloud to get a more filled out trending list!
+	    <div ng-show="messages.follow" class="user-feedback alert alert-info" role="alert">
+	      <i class="fa fa-info-circle"></i>
+	      <span>Follow more users on Soundcloud to find more music!</span>
+	      <em ng-click="clearMessages()">click to close</em>
 	    </div>
-	    <div ng-show="messages.noDataFound" class="alert alert-warning" role="alert" ng-click="clearMessages()">
-	      <i class="fa fa-info-circle"></i> No data found! Follow more people on Soundcloud to fix that!
+	    <div ng-show="messages.noDataFound" class="user-feedback alert alert-warning" role="alert">
+	      <i class="fa fa-info-circle"></i>
+	      <span>No music found! Follow more people on Soundcloud to fix that!</span>
+	      <em ng-click="clearMessages()">click to close</em>
 	    </div>
 		</div>
 
