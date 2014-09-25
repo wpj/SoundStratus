@@ -1,6 +1,6 @@
 angular.module('app.services', [])
 
-.constant('clientId', '863060121a2ffb5d258e7a793da0546b')
+.constant('clientId', '0d037198126d5d12705d3e5669b9dd9e')
 .constant('soundcloudUrl', '//api.soundcloud.com/')
 
 .factory('Soundcloud', ['$http', '$q', 'clientId', 'soundcloudUrl', function($http, $q, clientId, soundcloudUrl) {
