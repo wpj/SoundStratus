@@ -1,13 +1,20 @@
 angular.module('app.controllers', [])
 .controller('MainCtrl', ['$rootScope', '$scope', '$http', '$auth', 'Account', '$state', function($rootScope, $scope, $http, $auth, Account, $state) {
 
+  $scope.authenticating = false;
+
   $scope.login = function() {
+    $scope.authenticating = true;
     return $auth.authenticate('soundcloud')
       .then(function(response) {
         $scope.getProfile()
-        .then(function() { $state.go('trending'); });
+        .then(function() {
+          $state.go('trending');
+          $scope.authenticating = false;
+        });
       })
       .catch(function(error) {
+        $scope.authenticating = false;
         if (error) $rootScope.messages.error = error.data.errors;
       });
   };
