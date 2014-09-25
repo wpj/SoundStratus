@@ -3,6 +3,10 @@ angular.module('app.controllers', [])
 
   $scope.authenticating = false;
 
+  $scope.clearMessages = function() {
+    $rootScope.messages = {};
+  };
+
   $scope.login = function() {
     $scope.authenticating = true;
     return $auth.authenticate('soundcloud')
