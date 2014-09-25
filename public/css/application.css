@@ -19,8 +19,10 @@ ul.popular-list button:active{background-color:#c44033}
 ul.popular-list button:active:focus,ul.popular-list button:focus{outline:0}
 .audio-widget{display:-webkit-box;display:-moz-box;display:box;display:-webkit-flex;display:-moz-flex;display:-ms-flexbox;display:flex}
 .audio-widget .player-controls{-webkit-box-flex:10%;-moz-box-flex:10%;box-flex:10%;-webkit-flex:10%;-moz-flex:10%;-ms-flex:10%;flex:10%;display:-webkit-box;display:-moz-box;display:box;display:-webkit-flex;display:-moz-flex;display:-ms-flexbox;display:flex}
+@media screen and (max-width:500px){.audio-widget .player-controls{-webkit-box-flex:20%;-moz-box-flex:20%;box-flex:20%;-webkit-flex:20%;-moz-flex:20%;-ms-flex:20%;flex:20%}}
 .audio-widget .player-controls button{width:100%}
 .audio-widget .song-info{-webkit-box-flex:90%;-moz-box-flex:90%;box-flex:90%;-webkit-flex:90%;-moz-flex:90%;-ms-flex:90%;flex:90%}
+@media screen and (max-width:500px){.audio-widget .song-info{-webkit-box-flex:80%;-moz-box-flex:80%;box-flex:80%;-webkit-flex:80%;-moz-flex:80%;-ms-flex:80%;flex:80%}}
 .audio-widget .song-info h4,.audio-widget .song-info h5{margin:.5em}
 .audio-widget .song-info h5{padding-left:.18em}
 .audio-widget progress{-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none;cursor:pointer;width:100%;height:1.125em;vertical-align:bottom;background-color:#95a5a6;background-image:-webkit-linear-gradient(left,#95a5a6,#7f8c8d);background-image:linear-gradient(to right,#95a5a6,#7f8c8d)}
