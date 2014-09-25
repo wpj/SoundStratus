@@ -38,18 +38,29 @@
   <body ng-app="cirrusSounds" ng-controller="MainCtrl" ontouchstart="" ng-hide="authenticating">
 
 
-		<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+		<nav class="navbar navbar-static-top" role="navigation">
 		  <div class="container-fluid">
 		    <div class="navbar-header pull-left">
 		      <a class="navbar-brand" ui-sref="home">SoundCirrus</a>
 		    </div>
 
 		    <div class="navbar-header pull-right">
-	        <button ng-hide="isAuthenticated()" ng-click="login()" type="button" class="btn btn-default navbar-btn soundcloud-button"><i class="fa fa-soundcloud"></i> Sign in</button>
+		    	<a href="#" class="navbar-link">About</a>
+	        <button ng-hide="isAuthenticated()" ng-click="login()" type="button" class="btn navbar-btn soundcloud-button"><i class="fa fa-soundcloud"></i> Sign in</button>
 	        <button ng-show="isAuthenticated()" ng-click="logout()" class="btn btn-default navbar-btn">Sign out <i class="fa fa-sign-out"></i></button>
 		    </div>
 		  </div><!-- /.container-fluid -->
 		</nav>
+
+		<div ng-show="messages.error" class="alert alert-danger" role="alert">
+      <i class="fa fa-exclamation-triangle"></i> {{ messages.error }}
+    </div>
+    <div ng-show="messages.follow" class="alert alert-info" role="alert">
+      <i class="fa fa-info-circle"></i> Follow more people on Soundcloud to get a more filled out trending list!
+    </div>
+    <div ng-show="messages.noDataFound" class="alert alert-warning" role="alert">
+      <i class="fa fa-info-circle"></i> No data found! Follow more people on Soundcloud to fix that!
+    </div>
 
 		<div class="container" ui-view>
 		</div>
