@@ -7,9 +7,53 @@ $font-stack: "Raleway", "Verdana", "Lucida Grande", "Gill Sans", "Arial", "Helve
 }
 
 body {
-  // background-color: #95a5a6;
+  // @include size(100%);
+  // @include linear-gradient(#fffdd0, shade(#fffdd0, 2%));
+  @include linear-gradient(to right, #F2DBAE, shade(#F2DBAE, 1%));
+
+
+
+  // @include linear-gradient(to right, #F7BB97, tint(#DD5E89, 30%));
+  // @include linear-gradient(to right, #4CB8C4, shade(#3CD3AD, 15%));
+  // @include linear-gradient(to right, #4CB8C4, #3CD3AD);
+  // @include linear-gradient(to left, #085078, #85D8CE);
+  // @include linear-gradient(to left, tint(#ED4264, 30%), #FFEDBC);
+  // @include linear-gradient(to right, #ECE9E6, shade(#FFFFFF, 10%));
+  // @include linear-gradient(to left, tint(#DE6262, 10%), #FFB88C);
+  // @include linear-gradient(to right, #616161, #9bc5c3);
 }
 
-.soundcloud-button {
+$nav-color: tint(#1abc9c, 5%);
 
+.navbar {
+  background-color: $nav-color;
+  a {
+    color: darken(#2c3e50, 20%);
+      &:hover, &:active, &:focus {
+        color: #ecf0f1;
+    }
+  }
+}
+
+button.login-button {
+  background-color: rgba(0,0,0,0.1);
+  border-color: $nav-color;
+  color: rgba(0,0,0,0.5);
+
+  &:active, &:hover, &:focus {
+    background-color: rgba(0,0,0,0.2);
+    border-color: $nav-color;
+  }
+}
+
+.nav li.time-nav {
+  a {
+    &:hover, &:focus {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    &:active {
+      background-color: rgba(0,0,0,0.4);
+    }
+  }
 }
