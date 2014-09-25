@@ -66,7 +66,6 @@ angular.module('app.controllers', [])
 .controller('TrendingCtrl', ['$scope', 'Soundcloud', 'timeframe', '$state', function($scope, Soundcloud, timeframe, $state) {
 
   $scope.getProfile().then(function(user) {
-    console.log(user);
     Soundcloud.parseUser(user.uid, timeframe.time)
     .then(function(songs) {
       $scope.songs = songs;
