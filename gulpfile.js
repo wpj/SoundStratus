@@ -17,7 +17,11 @@ var dist = {
 gulp.task('browser-sync', function() {
   browserSync({
     open: false,
-    proxy: "localhost:8080"
+    // proxy: "localhost:8080",
+    notify: false,
+    server: {
+      baseDir: 'public'
+    }
   });
 });
 
@@ -53,7 +57,7 @@ gulp.task('ng-templates', function() {
 });
 
 gulp.task('styles', function() {
-  gulp.src('src/styles/*.scss')
+  gulp.src('src/styles/application.scss')
   .pipe(sass({
     onError: function(e) {console.log(e); }
   }))
