@@ -1,4 +1,4 @@
-angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filters', 'app.services', 'ui.router', 'satellizer', 'plangular'])
+angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filters', 'app.services', 'ui.router', 'satellizer', 'plangular', 'ngAnimate'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -63,7 +63,7 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
       }
     });
 
-  // $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/popular/this-week');
 }])
 
 .config(['$authProvider', 'clientId', function($authProvider, clientId) {
