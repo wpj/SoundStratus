@@ -32,7 +32,10 @@
       "main": "modernizr.js"
     },
     "plangular": {
-      "main": "ng-plangular.min.js"
+      "main": [
+        "ng-plangular.min.js",
+        "ng-plangular.js"
+      ]
     },
     "angular-animate": {
       "main": [
