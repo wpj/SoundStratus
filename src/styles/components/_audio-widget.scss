@@ -81,6 +81,9 @@ ul.popular-list {
 
   .player-controls {
     @include flex(10%);
+    @media screen and (max-width: 500px) {
+      @include flex(20%);
+    }
 
     @include display(flex);
     button {
@@ -90,6 +93,9 @@ ul.popular-list {
 
   .song-info {
     @include flex(90%);
+    @media screen and (max-width: 500px) {
+      @include flex(80%);
+    }
 
     h4, h5 {
       @include margin(0.5em);

@@ -65,9 +65,12 @@ angular.module('app.controllers', [])
 
 .controller('TrendingCtrl', ['$scope', 'Soundcloud', 'timeframe', '$state', function($scope, Soundcloud, timeframe, $state) {
 
+  $scope.showLoading = true;
+
   $scope.getProfile().then(function(user) {
     Soundcloud.parseUser(user.uid, timeframe.time)
     .then(function(songs) {
+      $scope.showLoading = false;
       $scope.songs = songs;
       if (!songs.length) {
         $scope.$emit('data:notFound');
