@@ -10,10 +10,6 @@ ul.popular-list {
     color: #ecf0f1;
     @include margin(null null 1em null);
 
-    &:first-child {
-      // background-color: shade($player-color, 20%);
-    }
-
     &:nth-child(2) {
       background-color: tint($player-color, 7%);
     }
