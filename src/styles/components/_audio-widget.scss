@@ -1,3 +1,5 @@
+$player-color: #2c3e50;
+
 ul.popular-list {
   h4 {
     text-transform: uppercase;
@@ -5,9 +7,52 @@ ul.popular-list {
 
   li.song {
     // height: em(100);
-    background-color: #2c3e50;
     color: #ecf0f1;
     @include margin(null null 1em null);
+
+    &:first-child {
+      // background-color: shade($player-color, 20%);
+    }
+
+    &:nth-child(2) {
+      background-color: tint($player-color, 7%);
+    }
+
+    &:nth-child(3) {
+      background-color: tint($player-color, 4%);
+    }
+
+    &:nth-child(4) {
+      background-color: tint($player-color, 1%);
+    }
+
+    &:nth-child(5) {
+      background-color: shade($player-color, 2%);
+    }
+
+    &:nth-child(6) {
+      background-color: shade($player-color, 5%);
+    }
+
+    &:nth-child(7) {
+      background-color: shade($player-color, 8%);
+    }
+
+    &:nth-child(8) {
+      background-color: shade($player-color, 11%);
+    }
+
+    &:nth-child(9) {
+      background-color: shade($player-color, 14%);
+    }
+
+    &:nth-child(10) {
+      background-color: shade($player-color, 17%);
+    }
+
+    &:nth-child(11) {
+      background-color: shade($player-color, 20%);
+    }
   }
 
   a {
