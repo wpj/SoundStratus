@@ -89,5 +89,31 @@ angular.module('app.controllers', [])
       if (err) $scope.$emit('data:error', err);
     });
   });
+  // $scope.songs = [
+  //   {
+  //     permalink_url: "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore",
+  //     title: "SBTRKT - THE LIGHT ft Denai Moore",
+  //     user: {
+  //       permalink_url: "http://soundcloud.com/sbtrkt",
+  //       username: "SBTRKT"
+  //     }
+  //   },
+  //   {
+  //     permalink_url: "http://soundcloud.com/four-tet/john-beltran-faux-four-tet-remixtext033",
+  //     title: "John Beltran - Faux (Four Tet Remix)TEXT033",
+  //     user: {
+  //       permalink_url: "http://soundcloud.com/four-tet",
+  //       username: "Four Tet"
+  //     }
+  //   },
+  //   {
+  //     permalink_url: "http://soundcloud.com/xlr8r/nuances-a-nod-was-the-first-step",
+  //     title: "Nuances - A Nod Was The First Step",
+  //     user: {
+  //       permalink_url: "http://soundcloud.com/xlr8r",
+  //       username: "XLR8R"
+  //     }
+  //   }
+  // ];
 
 }]);
