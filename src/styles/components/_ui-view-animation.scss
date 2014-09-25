@@ -1,0 +1,16 @@
+.animate-view-leave.ng-leave {
+  // @include transition(0.5s linear opacity);
+  @include transition(0.5s $ease-in-cubic transform);
+}
+
+// starting leave animation
+.animate-view-leave.ng-leave {
+  // opacity: 1;
+  @include transform(translateY(-5%));
+}
+
+// ending leave animation
+.animate-view-leave.ng-leave.ng-leave-active {
+  // opacity: 0;
+  @include transform(translateY(100%));
+}
