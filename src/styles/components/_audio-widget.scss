@@ -1,0 +1,84 @@
+ul.popular-list {
+  h4 {
+    text-transform: uppercase;
+  }
+
+  li.song {
+    // height: em(100);
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    @include margin(null null 1em null);
+  }
+
+  a {
+    color: #ecf0f1;
+    &:hover, &:active {
+      color: darken(#ecf0f1, 10%);
+    }
+  }
+
+  button {
+    background-color: #e74c3c;
+    border-radius: 0;
+
+    &:active {
+      background-color: shade(#e74c3c, 15%);
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:active:focus {
+      outline: 0;
+    }
+  }
+}
+
+.audio-widget {
+  @include display(flex);
+
+  .player-controls {
+    @include flex(10%);
+
+    @include display(flex);
+    button {
+      width: 100%;
+    }
+  }
+
+  .song-info {
+    @include flex(90%);
+
+    h4, h5 {
+      @include margin(0.5em);
+    }
+
+    h5 {
+      @include padding(null null null 0.18em);
+    }
+  }
+
+  progress {
+    @include appearance(none);
+    cursor: pointer;
+    width: 100%;
+    height: em(18);
+    vertical-align: bottom;
+    @include linear-gradient(to right, #95a5a6, #7f8c8d);
+
+    &[value]::-webkit-progress-value {
+      // @include linear-gradient(to right, #F09819, #FF512F);
+      // @include linear-gradient(to right, #4CB8C4, #3CD3AD);
+      // @include linear-gradient(to right, #F7BB97, #DD5E89);
+      // @include linear-gradient(to right, #71B280, #134E5E);
+      // @include linear-gradient(to right, #00d2ff, #3a7bd5);
+      @include linear-gradient(to right, #606c88, #3f4c6b);
+    }
+  }
+
+}
+
+.soundcloud-href {
+  margin-right: 1em;
+}

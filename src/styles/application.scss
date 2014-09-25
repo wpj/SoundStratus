@@ -1,10 +1,7 @@
 @import "bourbon/bourbon";
+@import "neat/neat";
+@import "base";
 
-* {
-  // font-family: 'Lato';
-  font-family: 'Raleway';
-}
-
-ul.trending-nav {
-  @include margin(null null 1em null);
-}
+// components
+@import "components/trending-nav";
+@import "components/audio-widget";
