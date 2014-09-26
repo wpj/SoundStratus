@@ -5,27 +5,12 @@
     </li>
     <li class="song repeat-animation" ng-repeat="song in songs | limitTo: 10">
 
-      <div class="audio-widget" plangular="{{ song.permalink_url }}">
-        
-        <div class="player-controls">
-          <button ng-if="player.playing !== track" ng-click="play()" class="btn"><i class="fa fa-play"></i></button>
-          <button ng-if="player.playing === track" ng-click="pause()" class="btn"><i class="fa fa-pause"></i></button>
-        </div>
-                
-        <div class="song-info">
-          <h4>
-            <a target="_blank" href="{{song.user.permalink_url}}">{{song.user.username}}</a>
-            <span class="soundcloud-href pull-right"><a href="{{ song.permalink_url }}"><i class="fa fa-soundcloud"></i></a></span>
-          </h4>
-          <h5>
-            <a target="_blank" href="{{song.permalink_url}}">{{ song.title }}</a>
-          </h5>
-          <progress ng-show="player.playing === track" value="{{ currentTime / duration || 0 }}"
-            ng-click="seek($event)">
-            {{ currentTime / duration }}
-          </progress>
-        </div>
-      
+      <div
+        music-player="{{ song.id }}"
+        url="{{ song.permalink_url }}"
+        title="{{ song.title }}"
+        username="{{ song.user.username }}"
+        artist-url="{{ song.user.permalink_url }}">
       </div>
   
     </li>

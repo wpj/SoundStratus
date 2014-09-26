@@ -1,0 +1,20 @@
+<div class="audio-widget">
+  <div class="player-controls">
+    <button ng-if="!playing" ng-click="play()" class="btn"><i class="fa fa-play"></i></button>
+    <button ng-if="playing" ng-click="pause()" class="btn"><i class="fa fa-pause"></i></button>
+  </div>
+
+  <div class="song-info">
+    <h4>
+      <a target="_blank" ng-href="{{ artistUrl }}">{{ username }}</a>
+      <span class="soundcloud-href pull-right"><a ng-href="{{ url }}"><i class="fa fa-soundcloud"></i></a></span>
+    </h4>
+    <h5>
+      <a target="_blank" ng-href="{{ url }}">{{ title }}</a>
+    </h5>
+    <progress ng-show="playing" value="{{ currentTime / duration || 0 }}"
+      ng-click="seek($event)">
+      {{ currentTime / duration }}
+    </progress>
+  </div>
+</div>
