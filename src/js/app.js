@@ -1,4 +1,4 @@
-angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filters', 'app.services', 'ui.router', 'satellizer', 'plangular', 'ngAnimate'])
+angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filters', 'app.services', 'ui.router', 'satellizer', 'ngAnimate'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider
