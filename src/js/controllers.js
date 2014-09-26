@@ -97,6 +97,8 @@ angular.module('app.controllers', [])
   $scope.$on('$destroy', function() {
     $scope.songs = null;
   });
+
+  
   // $scope.songs = [
   //   {
   //     permalink_url: "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore",

@@ -9,18 +9,18 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
     .state('login', {
       url: '/login',
       templateUrl: 'login.html',
-      controller: 'AuthCtrl',
-      onEnter: ['$state', '$auth', function($state, $auth) {
-        if ($auth.isAuthenticated()) { $state.go('trending'); }
-      }]
+      controller: 'AuthCtrl'
+      // onEnter: ['$state', '$auth', function($state, $auth) {
+      //   if ($auth.isAuthenticated()) { $state.go('trending'); }
+      // }]
     })
     .state('trending', {
       url: '/popular',
       templateUrl: 'trending.html',
-      controller: 'NavCtrl',
-      onEnter: ['$state', '$auth', function($state, $auth) {
-        if (!$auth.isAuthenticated()) { $state.go('login'); }
-      }]
+      controller: 'NavCtrl'
+      // onEnter: ['$state', '$auth', function($state, $auth) {
+      //   if (!$auth.isAuthenticated()) { $state.go('login'); }
+      // }]
     })
     .state('trending.today', {
       url: '/today',
