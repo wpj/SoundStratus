@@ -9,11 +9,10 @@ angular.module('app.services', [])
     client_id: clientId
   };
 
-  var parseUser = function(user, timeFrame) {
+  var parseUser = function(user) {
     return getFollowings(user)
       .then(function(followedUsers) { return parseFollowings(followedUsers); })
-      .then(function(followingUserTracks) { return parseTracks(_.flatten(followingUserTracks)); })
-      .then(function(parsedTracks) { return filterByTime(parsedTracks, timeFrame); });
+      .then(function(followingUserTracks) { return parseTracks(_.flatten(followingUserTracks)); });
   };
 
   // returns an array of user objects
@@ -72,7 +71,8 @@ angular.module('app.services', [])
   };
 
   return {
-    parseUser: parseUser
+    parseUser: parseUser,
+    filterByTime: filterByTime
   };
 }])
 
@@ -82,4 +82,16 @@ angular.module('app.services', [])
       return $http.get('/api/me');
     }
   };
-}]);
+}])
+
+.factory('musicCache', function() {
+  var musicCache = [];
+  return {
+    get: function() { return musicCache; },
+    set: function(cache) {
+      musicCache = cache;
+      // this.cached = true;
+    },
+    cached: false
+  };
+});

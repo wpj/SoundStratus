@@ -74,29 +74,58 @@ angular.module('app.controllers', [])
   });
 }])
 
-.controller('TrendingCtrl', ['$scope', 'Soundcloud', 'timeframe', '$state', function($scope, Soundcloud, timeframe, $state) {
+.controller('TrendingCtrl',
+  ['$scope', '$q', 'Soundcloud', 'musicCache', 'timeframe', '$state',
+  function($scope, $q, Soundcloud, musicCache, timeframe, $state) {
 
-  $scope.showLoading = true;
+  $scope.showLoading = false;
 
-  $scope.getProfile().then(function(user) {
-    Soundcloud.parseUser(user.uid, timeframe.time)
-    .then(function(songs) {
-      $scope.showLoading = false;
-      $scope.songs = songs;
-      if (!songs.length) {
-        $scope.$emit('data:notFound');
-      } else if (songs.length < 10) {
-        $scope.$emit('data:follow');
-      }
-    })
-    .catch(function(err) {
-      if (err) $scope.$emit('data:error', err);
+  if (musicCache.cached) {
+    console.log("cached");
+    $q.when(Soundcloud.filterByTime(musicCache.get(), timeframe))
+      .then(function(songs) {
+        $scope.songs = songs;
+        if (!songs.length) {
+          $scope.$emit('data:notFound');
+        } else if (songs.length < 10) {
+          $scope.$emit('data:follow');
+        }
+      })
+      .catch(function(error) {
+        if (error) $scope.$emit('data:error', error);
+      });
+  } else {
+    console.log("not cached");
+    $scope.showLoading = true;
+    $scope.getProfile().then(function(user) {
+      
+      Soundcloud.parseUser(user.uid)
+        .then(function(songs) {
+          $scope.showLoading = false;
+          musicCache.set(songs);
+
+          $q.when(Soundcloud.filterByTime(songs, timeframe))
+            .then(function(filteredSongs) {
+              $scope.songs = filteredSongs;
+              if (!filteredSongs.length) {
+                $scope.$emit('data:notFound');
+              } else if (filteredSongs.length < 10) {
+                $scope.$emit('data:follow');
+              }
+            })
+            .catch(function(error) {
+              if (error) $scope.$emit('data:error', error);
+            });
+        })
+        .catch(function(err) {
+          if (err) $scope.$emit('data:error', err);
+        });
     });
-  });
+  }
 
-  $scope.$on('$destroy', function() {
-    $scope.songs = null;
-  });
+  // $scope.$on('$destroy', function() {
+  //   $scope.songs = null;
+  // });
 
   
   // $scope.songs = [
