@@ -4,15 +4,7 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
   $stateProvider
     .state('home', {
       url: '/',
-      template: '<h1>Welcome to Cirrus Sounds</h1>'
-    })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'login.html',
-      controller: 'AuthCtrl'
-      // onEnter: ['$state', '$auth', function($state, $auth) {
-      //   if ($auth.isAuthenticated()) { $state.go('trending'); }
-      // }]
+      templateUrl: 'home.html'
     })
     .state('trending', {
       url: '/popular',

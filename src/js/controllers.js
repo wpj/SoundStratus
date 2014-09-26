@@ -48,10 +48,6 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('AuthCtrl', ['$scope', '$http', function($scope, $http) {
-
-}])
-
 .controller('NavCtrl', ['$rootScope', '$scope', '$state', 'Soundcloud', function($rootScope, $scope, $state, Soundcloud) {
 
   $state.go('trending.week');
