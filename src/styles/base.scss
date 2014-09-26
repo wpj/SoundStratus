@@ -18,6 +18,21 @@ body {
   // @include linear-gradient(to right, #616161, #9bc5c3);
 }
 
+body.auth-placeholder {
+  background-color: #3CD3AD;
+}
+
+i.auth-placeholder {
+  @include size(100%);
+  font-size: 100%;
+  text-align: center;
+  @include position(fixed, 0);
+
+  // &:before {
+  //   @include position(absolute, 50% null null null);
+  // }
+}
+
 $nav-color: tint(#1abc9c, 5%);
 
 .navbar {
