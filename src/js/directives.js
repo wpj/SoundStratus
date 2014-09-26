@@ -54,6 +54,13 @@ angular.module('app.directives', [])
           scope.duration = audio.duration;
         });
       }, false);
+
+      audio.addEventListener('ended', function() {
+        currentTime = 0;
+        scope.$apply(function() {
+          scope.playing = false;
+        });
+      });
     }
   };
 }]);
