@@ -27,7 +27,6 @@ angular.module('app.controllers', [])
     return $auth.logout()
       .then(function() {
         $scope.user = null;
-        $state.go('login');
       });
   };
 
