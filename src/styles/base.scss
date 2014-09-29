@@ -20,17 +20,15 @@ body {
 
 body.auth-placeholder {
   background-color: #3CD3AD;
+  @include position(absolute);
+  @include size(100%);
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(center);
 }
 
 i.auth-placeholder {
-  @include size(100%);
-  font-size: 100%;
-  text-align: center;
-  @include position(fixed, 0);
-
-  // &:before {
-  //   @include position(absolute, 50% null null null);
-  // }
+  font-size: 15em;
 }
 
 $nav-color: tint(#1abc9c, 5%);
