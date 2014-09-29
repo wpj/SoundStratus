@@ -60,6 +60,7 @@ ul.popular-list {
   button {
     background-color: #e74c3c;
     border-radius: 0;
+    @include position(relative);
 
     &:active {
       background-color: shade(#e74c3c, 15%);
@@ -71,6 +72,10 @@ ul.popular-list {
 
     &:active:focus {
       outline: 0;
+    }
+
+    i.loading {
+      @include position(absolute, 0.2em 0.2em null null);
     }
   }
 }

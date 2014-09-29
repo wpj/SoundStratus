@@ -18,10 +18,13 @@ angular.module('app.directives', [])
       scope.playing = false;
       scope.currentTime = 0;
       scope.duration = 0;
+      scope.loadingSong = false;
 
       scope.play = function() {
         audio.src = src;
+        scope.loadingSong = true;
         audio.addEventListener('canplay', function() {
+          scope.loadingSong = false;
           if (currentTime) audio.currentTime = currentTime;
           audio.play();
           scope.playing = true;
@@ -30,6 +33,7 @@ angular.module('app.directives', [])
 
       scope.pause = function() {
         audio.pause();
+        scope.loadingSong = false;
         scope.playing = false;
       };
 
