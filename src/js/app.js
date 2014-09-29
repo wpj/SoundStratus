@@ -65,7 +65,9 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
     url: '/auth/soundcloud',
     clientId: clientId,
     redirectUri: window.location.origin,
-    authorizationEndpoint: 'https://soundcloud.com/connect'
+    authorizationEndpoint: 'https://soundcloud.com/connect',
+    optionalUrlParams: ['display'],
+    display: 'popup'
   });
 
 }])
