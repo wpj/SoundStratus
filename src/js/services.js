@@ -90,7 +90,7 @@ angular.module('app.services', [])
     get: function() { return musicCache; },
     set: function(cache) {
       musicCache = cache;
-      // this.cached = true;
+      this.cached = true;
     },
     cached: false
   };
