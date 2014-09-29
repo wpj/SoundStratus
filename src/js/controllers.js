@@ -76,9 +76,9 @@ angular.module('app.controllers', [])
   $scope.showLoading = false;
 
   if (musicCache.cached) {
-    console.log("cached");
-    $q.when(Soundcloud.filterByTime(musicCache.get(), timeframe))
+    $q.when(Soundcloud.filterByTime(musicCache.get(), timeframe.time))
       .then(function(songs) {
+        $scope.showLoading = false;
         $scope.songs = songs;
         if (!songs.length) {
           $scope.$emit('data:notFound');
@@ -87,10 +87,10 @@ angular.module('app.controllers', [])
         }
       })
       .catch(function(error) {
+        $scope.showLoading = false;
         if (error) $scope.$emit('data:error', error);
       });
   } else {
-    console.log("not cached");
     $scope.showLoading = true;
     $scope.getProfile().then(function(user) {
       
@@ -99,7 +99,7 @@ angular.module('app.controllers', [])
           $scope.showLoading = false;
           musicCache.set(songs);
 
-          $q.when(Soundcloud.filterByTime(songs, timeframe))
+          $q.when(Soundcloud.filterByTime(songs, timeframe.time))
             .then(function(filteredSongs) {
               $scope.songs = filteredSongs;
               if (!filteredSongs.length) {
@@ -125,6 +125,7 @@ angular.module('app.controllers', [])
   
   // $scope.songs = [
   //   {
+  //     id: 168479631,
   //     permalink_url: "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore",
   //     title: "SBTRKT - THE LIGHT ft Denai Moore",
   //     user: {
@@ -133,6 +134,7 @@ angular.module('app.controllers', [])
   //     }
   //   },
   //   {
+  //     id: 168992385,
   //     permalink_url: "http://soundcloud.com/four-tet/john-beltran-faux-four-tet-remixtext033",
   //     title: "John Beltran - Faux (Four Tet Remix)TEXT033",
   //     user: {
@@ -141,8 +143,9 @@ angular.module('app.controllers', [])
   //     }
   //   },
   //   {
-  //     permalink_url: "http://soundcloud.com/xlr8r/nuances-a-nod-was-the-first-step",
-  //     title: "Nuances - A Nod Was The First Step",
+  //     id: 168460044,
+  //     permalink_url: "http://soundcloud.com/xlr8r/kidkanevil-thousand-year-forest-one-for-yosi",
+  //     title: "kidkanevil - Thousand Year Forest (One for Yosi)",
   //     user: {
   //       permalink_url: "http://soundcloud.com/xlr8r",
   //       username: "XLR8R"
