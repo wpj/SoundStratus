@@ -21,12 +21,12 @@ angular.module('app.directives', [])
       scope.loadingSong = false;
 
       scope.play = function() {
-        audio.src = src;
         scope.loadingSong = true;
+        audio.src = src;
+        audio.play();
         audio.addEventListener('canplay', function() {
           scope.loadingSong = false;
           if (currentTime) audio.currentTime = currentTime;
-          audio.play();
           scope.playing = true;
         });
       };
@@ -37,10 +37,16 @@ angular.module('app.directives', [])
         scope.playing = false;
       };
 
+      var seekTo = function(time) {
+        audio.currentTime = parseInt(time, 10);
+      };
+
       scope.seek = function(e) {
+        var offset = e.offsetX ? e.offsetX : e.layerX;
+        var targetWidth = e.target.offsetWidth;
         if (!audio.readyState) return false;
-        var xpos = e.offsetX / e.target.offsetWidth;
-        audio.currentTime = (xpos * audio.duration);
+        var xpos = offset / targetWidth;
+        seekTo(xpos * audio.duration);
       };
 
       scope.$on('$destroy', function() {
