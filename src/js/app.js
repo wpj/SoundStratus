@@ -9,10 +9,10 @@ angular.module('cirrusSounds', ['app.controllers', 'app.directives', 'app.filter
     .state('trending', {
       url: '/popular',
       templateUrl: 'trending.html',
-      controller: 'NavCtrl',
-      onEnter: ['$state', '$auth', function($state, $auth) {
-        if (!$auth.isAuthenticated()) { $state.go('home'); }
-      }]
+      controller: 'NavCtrl'
+      // onEnter: ['$state', '$auth', function($state, $auth) {
+      //   if (!$auth.isAuthenticated()) { $state.go('home'); }
+      // }]
     })
     .state('trending.today', {
       url: '/today',
