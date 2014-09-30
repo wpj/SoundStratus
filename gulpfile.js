@@ -1,14 +1,25 @@
 var gulp          = require('gulp');
-var concat        = require('gulp-concat');
-var sass          = require('gulp-ruby-sass');
-var browserSync   = require('browser-sync');
-var reload        = browserSync.reload;
-var uglify        = require('gulp-uglify');
-var minifyCSS     = require('gulp-minify-css');
-var htmlMin       = require('gulp-htmlmin');
 var sourcemaps    = require('gulp-sourcemaps');
+
+// js
+var concat        = require('gulp-concat');
+var coffee        = require('gulp-coffee');
+var uglify        = require('gulp-uglify');
 var mainFiles     = require('main-bower-files');
 var templateCache = require('gulp-angular-templatecache');
+
+// sass
+var sass          = require('gulp-ruby-sass');
+var minifyCSS     = require('gulp-minify-css');
+
+// html
+var htmlMin       = require('gulp-htmlmin');
+
+// utils
+var browserSync   = require('browser-sync');
+var reload        = browserSync.reload;
+var gulpIf        = require('gulp-if');
+var gutil         = require('gulp-util');
 
 var dist = {
   directory: "public/"
@@ -27,10 +38,11 @@ gulp.task('browser-sync', function() {
 
 gulp.task('js', function() {
   gulp.src(['src/js/**/*'])
-  // .pipe(sourcemaps.init())
+  .pipe(sourcemaps.init())
     // .pipe(concat('app.js'))
     // .pipe(uglify())
-  // .pipe(sourcemaps.write())
+  .pipe(gulpIf(/[.]coffee$/, coffee().on('error', gutil.log)))
+  .pipe(sourcemaps.write())
   .pipe(gulp.dest(dist.directory + 'js/'))
   .pipe(reload({stream: true}));
 });
