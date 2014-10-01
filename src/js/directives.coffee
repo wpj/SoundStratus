@@ -10,50 +10,72 @@ angular.module('app.directives', [])
     artistUrl: '@'
   link: (scope, elem, attrs) ->
 
-    audio = document.createElement 'audio'
-    currentTime = 0
-    src = "#{soundcloudUrl}tracks/#{attrs.musicPlayer}/stream?client_id=#{clientId}"
+    class AudioPlayer
+      constructor: ->
+        @audio       = document.createElement 'audio'
+        @currentTime = 0
+        @src         = "#{soundcloudUrl}tracks/#{attrs.musicPlayer}/stream?client_id=#{clientId}"
+        @eventTypes  = ['pause', 'timeupdate', 'ended', 'canplay']
+        @setEvents()
 
-    scope.playing = false
-    scope.currentTime = 0
-    scope.duration = 0
-    scope.loadingSong = false
+      setEvents: ->
+        @audio.addEventListener 'pause', =>
+          @currentTime = @audio.currentTime
+        , false
+
+        @audio.addEventListener 'timeupdate', =>
+          scope.$apply =>
+            scope.currentTime = @audio.currentTime
+            scope.duration = @audio.duration
+        , false
+
+        @audio.addEventListener 'ended', =>
+          @currentTime = 0
+          scope.$apply ->
+            scope.playing = false
+        , false
+
+      play: =>
+        scope.loadingSong = true
+        @audio.src = @src
+        @audio.play()
+        @audio.addEventListener 'canplay', =>
+          @audio.removeEventListener 'canplay'
+          @audio.currentTime ||= @currentTime
+          scope.loadingSong = false
+          scope.playing = true
+
+      pause: =>
+        @audio.pause()
+        [scope.loadingSong, scope.playing] = [false, false]
+
+      seek: (e) =>
+        if offset = e.offsetX || e.layerX - e.target.offsetLeft
+          percent = offset / e.target.offsetWidth
+          duration = @audio.duration
+          seekTo = duration * percent
+          @audio.currentTime = parseInt(seekTo, 10)
+
+      destroy: =>
+        @pause()
+        for event in @eventTypes
+          @audio.removeEventListener event
+
+    
+    player = new AudioPlayer()
+
+    [scope.duration, scope.currentTime] = [0, 0]
+    [scope.playing, scope.loadingSong] = [false, false]
 
     scope.play = ->
-      scope.loadingSong = true
-      audio.src = src
-      audio.play()
-      audio.addEventListener 'canplay', ->
-        scope.loadingSong = false
-        audio.currentTime ||= currentTime
-        scope.playing = true
+      player.play()
 
     scope.pause = ->
-      audio.pause()
-      scope.loadingSong = false
-      scope.playing = false
+      player.pause()
 
     scope.seek = (e) ->
-      # return false unless audio.readyState
-      if offset = e.offsetX || e.layerX - e.target.offsetLeft
-        percent = offset / e.target.offsetWidth
-        duration = audio.duration
-        seekTo = duration * percent
-        audio.currentTime = parseInt(seekTo, 10)
+      player.seek(e)
 
-    audio.addEventListener 'pause', ->
-      currentTime = audio.currentTime
-    , false
-
-    audio.addEventListener 'timeupdate', ->
-      scope.$apply ->
-        scope.currentTime = audio.currentTime
-        scope.duration = audio.duration
-    , false
-
-    audio.addEventListener 'ended', ->
-      currentTime = 0
-      scope.$apply ->
-        scope.playing = false
-    , false
+    scope.$on '$destroy', ->
+      player.destroy()
 ]
