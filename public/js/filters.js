@@ -1,0 +1,2 @@
+angular.module('app.filters', []);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlsdGVycy5qcyIsIm5hbWVzIjpbXSwibWFwcGluZ3MiOiIiLCJzb3VyY2VzIjpbImZpbHRlcnMuanMiXSwic291cmNlc0NvbnRlbnQiOlsiYW5ndWxhci5tb2R1bGUoJ2FwcC5maWx0ZXJzJywgW10pOyJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
