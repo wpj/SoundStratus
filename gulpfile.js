@@ -40,8 +40,8 @@ gulp.task('js', function() {
   gulp.src(['src/js/**/*'])
   .pipe(sourcemaps.init())
   .pipe(gulpIf(/[.]coffee$/, coffee().on('error', gutil.log)))
-  .pipe(concat('app.js'))
-  .pipe(uglify())
+  // .pipe(concat('app.js'))
+  // .pipe(uglify())
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(dist.directory + 'js/'))
   .pipe(reload({stream: true}));
