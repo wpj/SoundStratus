@@ -152,11 +152,6 @@ ul.popular-list {
       background-color: #4CB8C4;
       @include linear-gradient(to left, #4CB8C4, #3CD3AD);
     }
-
-    &[value] {
-      background-color: #4CB8C4;
-      @include linear-gradient(to left, #4CB8C4, #3CD3AD);
-    }
   }
 
   .progress-fallback {
