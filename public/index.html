@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SoundCirrus</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link rel="shortcut icon" href="../favicon.ico"> -->
+    <link rel="stylesheet" type="text/css" href="css/application.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <!--<script src="lib/angular/angular.js"></script>-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/satellizer/satellizer.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/templates.js"></script>
+    <!--<script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/services.js"></script>-->
+  
+  </head>
+
+  <body ng-app="cirrusSounds" ng-controller="MainCtrl" ontouchstart="" ng-class="{ 'auth-placeholder': authenticating }">
+
+    <div ng-hide="authenticating">
+      <nav class="navbar navbar-static-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header pull-left">
+            <a class="navbar-brand" ui-sref="home">SoundCirrus</a>
+          </div>
+      
+          <div class="navbar-header pull-right">
+            <a href="#" class="navbar-link">About</a>
+            <button ng-hide="isAuthenticated()" ng-click="login()" type="button" class="btn navbar-btn login-button"><i class="fa fa-soundcloud"></i> Sign in</button>
+            <button ng-show="isAuthenticated()" ng-click="logout()" class="btn btn-default navbar-btn login-button">Sign out <i class="fa fa-sign-out"></i></button>
+          </div>
+        </div><!-- /.container-fluid -->
+      </nav>
+      
+      <div class="container">
+        <div ng-show="messages.error" class="user-feedback alert alert-danger" role="alert">
+          <i class="fa fa-exclamation-triangle"></i>
+          <span>There was an issue when connecting to Soundcloud, please refresh the page to try again</span>
+          <em ng-click="clearMessages()">click to close</em>
+        </div>
+        <div ng-show="messages.follow" class="user-feedback alert alert-info" role="alert">
+          <i class="fa fa-info-circle"></i>
+          <span>Follow more users on Soundcloud to find more music!</span>
+          <em ng-click="clearMessages()">click to close</em>
+        </div>
+        <div ng-show="messages.noDataFound" class="user-feedback alert alert-warning" role="alert">
+          <i class="fa fa-info-circle"></i>
+          <span>No music found! Follow more people on Soundcloud to fix that!</span>
+          <em ng-click="clearMessages()">click to close</em>
+        </div>
+      </div>
+      
+      <div class="container" ui-view>
+      </div>
+    </div>
+
+    <i ng-if="authenticating" class="fa fa-soundcloud auth-placeholder"></i>
+
+  </body>
+</html>
