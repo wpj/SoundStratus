@@ -42,18 +42,15 @@ angular.module('app.controllers', [])
 
     $scope.logout = ->
       $auth.logout()
-        .then ->
-            $scope.user = null
+        .then -> $scope.user = null
 
     $scope.isAuthenticated = ->
       $auth.isAuthenticated()
 
     $scope.getProfile = ->
       Account.get()
-        .then (response) ->
-          $scope.user = response.data
-        .catch (error) ->
-          $rootScope.messages.error = true
+        .then (response) -> $scope.user = response.data
+        .catch (error) -> $rootScope.messages.error = true
 ]
 
 .controller 'NavCtrl',
