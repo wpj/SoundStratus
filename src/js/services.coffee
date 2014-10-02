@@ -53,7 +53,7 @@ angular.module('app.services', [])
           if time
             Date.parse(track.created_at) < time
           else
-            return
+            false
         .sortBy 'playback_count'
         .reverse()
         .first 10
