@@ -25,7 +25,7 @@ angular.module('app.controllers', [])
         $window.addEventListener 'focus', ->
           unless $scope.authenticating
             $scope.iosLogin = false
-            $window.removeEventListener 'focus'
+            $window.removeEventListener 'focus', self.focus
 
       $scope.authenticating = true
       $auth.authenticate 'soundcloud'

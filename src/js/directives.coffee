@@ -40,7 +40,7 @@ angular.module('app.directives', [])
         @audio.src = @src
         @audio.play()
         @audio.addEventListener 'canplay', =>
-          @audio.removeEventListener 'canplay'
+          @audio.removeEventListener 'canplay', self.canplay
           @audio.currentTime ||= @currentTime
           scope.loadingSong = false
           scope.playing = true
@@ -59,7 +59,7 @@ angular.module('app.directives', [])
       destroy: =>
         @pause()
         for event in @eventTypes
-          @audio.removeEventListener event
+          @audio.removeEventListener event, self[event]
 
     
     player = new AudioPlayer()
