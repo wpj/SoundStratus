@@ -14,7 +14,7 @@ angular.module('app.controllers', [])
       $rootScope.messages = {}
 
     isIos = ->
-      navigator.userAgent.match(/iPhone/ or /iPad/)
+      navigator.userAgent.match(/iPhone|iPad/)
 
     # mobile Safari doesn't support window.close()
     # this is a temporary workaround until that's fixed
