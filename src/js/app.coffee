@@ -62,6 +62,5 @@ angular.module('cirrusSounds',
 .run ['$rootScope', ($rootScope) ->
   $rootScope.messages = {}
 
-  $rootScope.$on '$stateChangeSuccess', (evt) ->
-    $rootScope.messages = {}
+  $rootScope.$on '$stateChangeSuccess', (evt) -> $rootScope.messages = {}
 ]
