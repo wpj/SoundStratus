@@ -18,17 +18,23 @@ body {
   // @include linear-gradient(to right, #616161, #9bc5c3);
 }
 
-body.auth-placeholder {
+
+div.auth-placeholder {
   background-color: #3CD3AD;
   @include position(absolute);
   @include size(100%);
   @include display(flex);
+  @include flex-direction(column);
   @include justify-content(center);
   @include align-items(center);
 }
 
 i.auth-placeholder {
   font-size: 15em;
+}
+
+h3.auth-placeholder {
+  text-align: center;
 }
 
 $nav-color: tint(#1abc9c, 5%);
