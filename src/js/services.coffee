@@ -39,14 +39,10 @@ angular.module('app.services', [])
     filterByTime = (tracks, time) ->
       date = new Date()
 
-      if time == 'day'
-        time = date.setDate(date.getDate() - 1)
-      else if time == 'week'
-        time = date.setDate(date.getDate() - 7)
-      else if time == 'month'
-        time = date.setMonth(date.getMonth() - 1)
-      else
-        time = null
+      if time == 'day'        then time = date.setDate(date.getDate() - 1)
+      else if time == 'week'  then time = date.setDate(date.getDate() - 7)
+      else if time == 'month' then time = date.setMonth(date.getMonth() - 1)
+      else                         time = null
 
       tracks
         .reject (track) ->
