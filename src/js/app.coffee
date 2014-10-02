@@ -38,7 +38,7 @@ angular.module('cirrusSounds',
         resolve:
           'timeframe': -> time: 'month'
 
-      .state 'trending.alltime',
+      .state 'trending.allTime',
         url: '/all-time'
         templateUrl: 'trending-list.html'
         controller: 'TrendingCtrl'
