@@ -14,7 +14,7 @@ angular.module('app.directives', [])
       constructor: ->
         @audio       = document.createElement 'audio'
         @currentTime = 0
-        @src         = "#{soundcloudUrl}tracks/#{attrs.musicPlayer}/stream?client_id=#{clientId}"
+        @src         = "#{attrs.streamUrl}?client_id=#{clientId}"
         @eventTypes  = ['pause', 'timeupdate', 'ended', 'canplay']
         @setEvents()
 
