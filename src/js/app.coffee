@@ -12,6 +12,7 @@ angular.module('cirrusSounds',
       .state 'trending',
         url: '/popular'
         templateUrl: 'trending.html'
+        abstract: true
         controller: 'NavCtrl'
         onEnter: ['$state', '$auth', ($state, $auth) ->
           $state.go('home') unless $auth.isAuthenticated()
@@ -21,30 +22,29 @@ angular.module('cirrusSounds',
         url: '/today'
         templateUrl: 'trending-list.html'
         controller: 'TrendingCtrl'
-        resolve:
-          'timeframe': -> time: 'day'
+        resolve: 'timeframe': -> time: 'day'
 
       .state 'trending.week',
         url: '/this-week'
         templateUrl: 'trending-list.html'
         controller: 'TrendingCtrl'
-        resolve:
-          'timeframe': -> time: 'week'
+        resolve: 'timeframe': -> time: 'week'
 
       .state 'trending.month',
         url: '/this-month'
         templateUrl: 'trending-list.html'
         controller: 'TrendingCtrl'
-        resolve:
-          'timeframe': -> time: 'month'
+        resolve: 'timeframe': -> time: 'month'
 
       .state 'trending.allTime',
         url: '/all-time'
         templateUrl: 'trending-list.html'
         controller: 'TrendingCtrl'
-        resolve:
-          'timeframe': -> time: 'allTime'
+        resolve: 'timeframe': -> time: 'allTime'
 
+    # make .week the default child state of popular
+    $urlRouterProvider.when('/popular', '/popular/this-week')
+    $urlRouterProvider.when('/popular/', '/popular/this-week')
     $urlRouterProvider.otherwise '/'
 ]
 

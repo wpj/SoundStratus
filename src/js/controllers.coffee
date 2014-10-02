@@ -56,9 +56,6 @@ angular.module('app.controllers', [])
 .controller 'NavCtrl',
   ['$rootScope', '$scope', '$state', 'Soundcloud',
   ($rootScope, $scope, $state, Soundcloud) ->
-
-    $state.go 'trending.week'
-
     $scope.activeTab = (tab) ->
       tab == $state.current.name
 ]
