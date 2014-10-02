@@ -27,7 +27,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 
     <script src="lib/angular-animate/angular-animate.js"></script>
-    <script src="lib/satellizer/satellizer.min.js"></script>
+    <script src="lib/satellizer/satellizer.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/templates.js"></script>
@@ -38,9 +38,9 @@
   
   </head>
 
-  <body ng-app="cirrusSounds" ng-controller="MainCtrl" ontouchstart="" ng-class="{ 'auth-placeholder': authenticating }">
+  <body ng-app="cirrusSounds" ng-controller="MainCtrl" ontouchstart="">
 
-    <div ng-hide="authenticating">
+    <div ng-hide="showPlaceholder()">
       <nav class="navbar navbar-static-top" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header pull-left">
@@ -71,13 +71,21 @@
           <span>No music found! Follow more people on Soundcloud to fix that!</span>
           <em ng-click="clearMessages()">click to close</em>
         </div>
-      </div>
+      </div><!-- /.container -->
       
       <div class="container" ui-view>
       </div>
     </div>
 
-    <i ng-if="authenticating" class="fa fa-soundcloud auth-placeholder"></i>
+    <div class="auth-placeholder" ng-show="authenticating">
+      <i ng-if="authenticating" class="fa fa-soundcloud auth-placeholder"></i>
+      <h3 class="auth-placeholder">Signing in with Soundcloud</h3>
+    </div>
+
+    <div class="auth-placeholder" ng-show="iosLogin">
+      <i class="fa fa-soundcloud auth-placeholder"></i>
+      <h3 class="auth-placeholder">Please close this tab if it doesn't close automatically.</h3>
+    </div>
 
   </body>
 </html>

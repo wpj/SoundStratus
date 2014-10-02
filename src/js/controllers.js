@@ -1,13 +1,35 @@
 angular.module('app.controllers', [])
-.controller('MainCtrl', ['$rootScope', '$scope', '$http', '$auth', 'Account', '$state', function($rootScope, $scope, $http, $auth, Account, $state) {
+.controller('MainCtrl', ['$rootScope', '$scope', '$window', '$http', '$auth', 'Account', '$state', function($rootScope, $scope, $window, $http, $auth, Account, $state) {
 
   $scope.authenticating = false;
+  $scope.iosLogin = false;
+
+  $scope.showPlaceholder = function() {
+    return $scope.authenticating || $scope.iosLogin;
+  };
 
   $scope.clearMessages = function() {
     $rootScope.messages = {};
   };
 
+  var isIos = function() {
+    return navigator.userAgent.match(/iPhone/ || /iPad/);
+  };
+
+  // mobile Safari doesn't support window.close()
+  // this is a temporary workaround until that's fixed
+  if (isIos() && window.opener) $scope.iosLogin = true;
+
   $scope.login = function() {
+    if (isIos()) {
+      $window.addEventListener('focus', function() {
+        if (!$scope.authenticating) {
+          $scope.iosLogin = false;
+          $window.removeEventListener('focus');
+        }
+      });
+    }
+
     $scope.authenticating = true;
     return $auth.authenticate('soundcloud')
       .then(function(response) {
