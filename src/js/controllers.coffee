@@ -111,25 +111,29 @@ angular.module('app.controllers', [])
       $scope.songs = null
 
     # $scope.songs = [
+    #   {
     #     id: 168479631
     #     permalink_url: "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore"
     #     title: "SBTRKT - THE LIGHT ft Denai Moore"
     #     user:
     #       permalink_url: "http://soundcloud.com/sbtrkt"
     #       username: "SBTRKT"
-
+    #   }
+    #   {
     #     id: 168992385
     #     permalink_url: "http://soundcloud.com/four-tet/john-beltran-faux-four-tet-remixtext033"
     #     title: "John Beltran - Faux (Four Tet Remix)TEXT033"
     #     user:
     #       permalink_url: "http://soundcloud.com/four-tet"
     #       username: "Four Tet"
-
+    #   }
+    #   {
     #     id: 168460044
     #     permalink_url: "http://soundcloud.com/xlr8r/kidkanevil-thousand-year-forest-one-for-yosi"
     #     title: "kidkanevil - Thousand Year Forest (One for Yosi)"
     #     user:
     #       permalink_url: "http://soundcloud.com/xlr8r"
     #       username: "XLR8R"
+    #   }
     # ]
 ]
