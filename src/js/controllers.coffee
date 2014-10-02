@@ -1,8 +1,8 @@
 angular.module('app.controllers', [])
 
 .controller 'MainCtrl',
-  ['$rootScope', '$scope', '$window', '$http', '$auth', 'Account', '$state',
-  ($rootScope, $scope, $window, $http, $auth, Account, $state) ->
+  ['$rootScope', '$scope', '$window', '$auth', 'Account', '$state',
+  ($rootScope, $scope, $window, $auth, Account, $state) ->
     
     $scope.authenticating = false
     $scope.iosLogin = false
@@ -34,7 +34,7 @@ angular.module('app.controllers', [])
         
         .then ->
           $scope.authenticating = false
-          $state.go 'trending'
+          $state.go 'trending.week'
 
         .catch (error) ->
           $scope.authenticating = false
@@ -54,15 +54,14 @@ angular.module('app.controllers', [])
 ]
 
 .controller 'NavCtrl',
-  ['$rootScope', '$scope', '$state', 'Soundcloud',
-  ($rootScope, $scope, $state, Soundcloud) ->
+  ['$scope', '$state', ($scope, $state) ->
     $scope.activeTab = (tab) ->
       tab == $state.current.name
 ]
 
 .controller 'TrendingCtrl',
-  ['$rootScope', '$scope', '$q', 'Soundcloud', 'musicCache', 'timeframe', '$state',
-  ($rootScope, $scope, $q, Soundcloud, musicCache, timeframe, $state) ->
+  ['$rootScope', '$scope', '$q', 'Soundcloud', 'musicCache', 'timeframe',
+  ($rootScope, $scope, $q, Soundcloud, musicCache, timeframe) ->
     
     $scope.showLoading = false
 
