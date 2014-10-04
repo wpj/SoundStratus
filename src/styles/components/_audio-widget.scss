@@ -122,6 +122,9 @@ ul.popular-list {
     
     &.player-error {
       background-color: #e67e22;
+      i.fa-close {
+        cursor: pointer;
+      }
     }
 
     @media screen and (max-width: 500px) {
