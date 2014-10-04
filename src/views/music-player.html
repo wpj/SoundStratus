@@ -1,7 +1,7 @@
 <div class="audio-widget">
   <div class="player-controls">
-    <button ng-hide="playing" ng-click="play()" ng-class="{ 'loading-song': loadingSong }" class="btn"><i class="fa fa-play"></i></button>
-    <button ng-show="playing" ng-click="pause()" class="btn"><i class="fa fa-pause"></i></button>
+    <button ng-hide="playing" ng-click="musicPlayer.play()" ng-class="{ 'loading-song': loadingSong }" class="btn"><i class="fa fa-play"></i></button>
+    <button ng-show="playing" ng-click="musicPlayer.pause()" class="btn"><i class="fa fa-pause"></i></button>
   </div>
 
   <div class="song-info">
@@ -13,7 +13,7 @@
       <a target="_blank" ng-href="{{ url }}">{{ title }}</a>
     </h5>
     <progress ng-show="playing" value="{{ currentTime / duration || 0 }}"
-      ng-click="seek($event)">
+      ng-click="musicPlayer.seek($event)">
       {{ currentTime / duration }}
     </progress>
   </div>
