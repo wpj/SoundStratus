@@ -23,6 +23,9 @@ angular.module('app.directives', [])
         @audio.controls.play()
         @interval = $interval =>
           scope.currentTime = @audio.controls.getCurrentPosition()
+          if @audio.controls.getState() is 'ended'
+            scope.playing = false
+            $interval.cancel @interval
         , 100
 
       pause: ->
