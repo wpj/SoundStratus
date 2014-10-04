@@ -63,3 +63,7 @@ angular.module('cirrusSounds',
   $rootScope.messages = {}
   $rootScope.$on '$stateChangeSuccess', (evt) -> $rootScope.messages = {}
 ]
+
+.run ['clientId', (clientId) ->
+  SC.initialize client_id: clientId
+]
