@@ -12,7 +12,9 @@ angular.module('app.directives', [])
 
     class AudioPlayer
       constructor: ->
-        @audio = duration: attrs.duration
+        @audio =
+          duration: attrs.duration
+          error: false
         scope.loadingSong = true
         SC.stream "/tracks/#{attrs.musicPlayer}", (player) =>
           scope.loadingsong = false
@@ -25,6 +27,10 @@ angular.module('app.directives', [])
           scope.currentTime = @audio.controls.getCurrentPosition()
           if @audio.controls.getState() is 'ended'
             scope.playing = false
+            $interval.cancel @interval
+          else if @audio.controls.getState() is 'error'
+            scope.playing = false
+            @audio.error = true
             $interval.cancel @interval
         , 100
 
@@ -46,6 +52,7 @@ angular.module('app.directives', [])
     player = new AudioPlayer()
     scope.musicPlayer = player
     scope.duration = player.audio.duration
+    scope.clearError = -> player.audio.error = false
 
     scope.$on '$destroy', ->
       player.destroy()

@@ -119,6 +119,11 @@ ul.popular-list {
 
   .song-info {
     @include flex(90%);
+    
+    &.player-error {
+      background-color: #e67e22;
+    }
+
     @media screen and (max-width: 500px) {
       @include flex(80%);
     }
