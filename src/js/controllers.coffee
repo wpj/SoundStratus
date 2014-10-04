@@ -105,28 +105,24 @@ angular.module('app.controllers', [])
 
     # $scope.songs = [
     #   {
-    #     id: 168479631
-    #     permalink_url: "http://soundcloud.com/sbtrkt/sbtrkt-the-light-feat-denai-moore"
-    #     title: "SBTRKT - THE LIGHT ft Denai Moore"
+    #     id: 170000664
+    #     duration: 254141
+    #     permalink_url: "http://soundcloud.com/jonhopkins/form-by-firelight-with-raphaelle-standell"
+    #     stream_url: "https://api.soundcloud.com/tracks/170000664/stream"
+    #     title: "Form By Firelight (with Raphaelle Standell)"
     #     user:
-    #       permalink_url: "http://soundcloud.com/sbtrkt"
-    #       username: "SBTRKT"
+    #       permalink_url: "http://soundcloud.com/jonhopkins"
+    #       username: "Jon Hopkins"
     #   }
     #   {
-    #     id: 168992385
-    #     permalink_url: "http://soundcloud.com/four-tet/john-beltran-faux-four-tet-remixtext033"
-    #     title: "John Beltran - Faux (Four Tet Remix)TEXT033"
+    #     id: 170236823
+    #     duration: 203539
+    #     permalink_url: "http://soundcloud.com/glassanimals/hazey-rework-feat-rome-fortune"
+    #     stream_url: "https://api.soundcloud.com/tracks/170236823/stream"
+    #     title: "Hazey (Dave Glass Animals Rework feat. Rome Fortune)"
     #     user:
-    #       permalink_url: "http://soundcloud.com/four-tet"
-    #       username: "Four Tet"
-    #   }
-    #   {
-    #     id: 168460044
-    #     permalink_url: "http://soundcloud.com/xlr8r/kidkanevil-thousand-year-forest-one-for-yosi"
-    #     title: "kidkanevil - Thousand Year Forest (One for Yosi)"
-    #     user:
-    #       permalink_url: "http://soundcloud.com/xlr8r"
-    #       username: "XLR8R"
+    #       permalink_url: "http://soundcloud.com/glassanimals"
+    #       username: "Glass Animals"
     #   }
     # ]
 ]
