@@ -67,3 +67,7 @@ angular.module('cirrusSounds',
 .run ['clientId', (clientId) ->
   SC.initialize client_id: clientId
 ]
+
+.run ['flash', (flash) ->
+  flash.test()
+]
