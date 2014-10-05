@@ -77,3 +77,11 @@ angular.module('app.services', [])
       @cached = true
     cached: false
   }
+
+.factory 'flash', ->
+  enabled: false
+  test: ->
+    try
+      @enabled = Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))
+    catch e
+      @enabled = 'undefined' isnt typeof navigator.mimeTypes['application/x-shockwave-flash']
