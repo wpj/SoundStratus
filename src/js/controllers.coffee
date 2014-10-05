@@ -54,9 +54,10 @@ angular.module('app.controllers', [])
 ]
 
 .controller 'NavCtrl',
-  ['$scope', '$state', ($scope, $state) ->
+  ['$rootScope', '$scope', '$state', 'flash', ($rootScope, $scope, $state, flash) ->
     $scope.activeTab = (tab) ->
       tab == $state.current.name
+    $rootScope.messages.hasFlash = not flash.enabled
 ]
 
 .controller 'TrendingCtrl',
