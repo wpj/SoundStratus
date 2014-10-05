@@ -1,8 +1,8 @@
 angular.module('app.controllers', [])
 
 .controller 'MainCtrl',
-  ['$rootScope', '$scope', '$location', '$window', '$auth', 'Account', '$state',
-  ($rootScope, $scope, $location, $window, $auth, Account, $state) ->
+  ['$rootScope', '$scope', '$location', '$window', '$timeout', '$auth', 'Account', '$state',
+  ($rootScope, $scope, $location, $window, $timeout, $auth, Account, $state) ->
     
     $scope.authenticating = false
     $scope.iosLogin = false
@@ -53,11 +53,7 @@ angular.module('app.controllers', [])
       Account.get()
         .then (response) -> $scope.user = response.data
         .catch (error) -> $rootScope.messages.error = true
-]
 
-.controller 'HomeCtrl',
-  ['$rootScope', '$scope', '$timeout', '$state', 'Soundcloud',
-  ($rootScope, $scope, $timeout, $state, Soundcloud) ->
     $scope.observeUser = ->
       if $scope.soundcloudUsername?
         Soundcloud.checkUser $scope.soundcloudUsername

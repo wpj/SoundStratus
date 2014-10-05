@@ -8,7 +8,6 @@ angular.module('cirrusSounds',
       .state 'home',
         url: '/'
         templateUrl: 'home.html'
-        controller: 'HomeCtrl'
 
       .state 'trending',
         url: '/popular?user'
