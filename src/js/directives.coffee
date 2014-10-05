@@ -1,6 +1,6 @@
 angular.module('app.directives', [])
 
-.directive 'musicPlayer', ['$http', '$interval', 'soundcloudUrl', 'clientId', ($http, $interval, soundcloudUrl, clientId) ->
+.directive 'musicPlayer', ['$http', '$interval', 'soundcloudUrl', 'clientId', 'flash', ($http, $interval, soundcloudUrl, clientId, flash) ->
   restrict: 'A'
   templateUrl: 'music-player.html'
   scope:
@@ -19,6 +19,10 @@ angular.module('app.directives', [])
         SC.stream "/tracks/#{attrs.musicPlayer}", (player) =>
           scope.loadingsong = false
           @audio.controls = player
+          
+          unless flash.enabled
+            if @audio.controls.getType().match /Flash/
+              elem.replaceWith "<iframe width='100%' height='115' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/#{attrs.musicPlayer}&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;visual=true&amp;single_active=false'></iframe>"
 
       play: ->
         scope.playing = true
