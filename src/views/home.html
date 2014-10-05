@@ -4,25 +4,46 @@
 
     <div ng-show="isAuthenticated()">
       <p>Get the most popular tracks uploaded or favorited by the people you follow on Soundcloud.</p>
+
       <p><a class="btn btn-primary btn-lg" ui-sref="trending.week">See your popular music</a></p>
-      <p>Or enter someone's Soundcloud username to see their popular music:</p>
-      <form name="soundcloudSearch" ng-submit="observeUser()">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
-          <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
-            <span ng-hide="messages.userNotFound"><i class="fa fa-search"></i></span>
-            <span ng-if="messages.userNotFound"><i class="fa fa-exclamation-triangle"></i> User not found!</span>
-          </span>
-        </div>
-      </form>
+      
+      <section class="jumbotron-section">
+        <p>Or enter someone's Soundcloud username to see their popular music:</p>
+        <form name="soundcloudSearch" ng-submit="observeUser()">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
+            <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
+              <span ng-hide="messages.userNotFound"><i class="fa fa-search"></i></span>
+              <span ng-if="messages.userNotFound"><i class="fa fa-exclamation-triangle"></i> User not found!</span>
+            </span>
+          </div>
+        </form>
+      </section>
     </div>
 
     <div ng-hide="isAuthenticated()">
-      <h3><em>Please log in to continue</em></h3>
-      <p>In order to get your popular tracks, you need to sign in with Soundcloud.</p>
-      <p>
-        <button ng-click="login()" class="btn btn-primary btn-lg"><i class="fa fa-soundcloud"></i> Sign in</button>
-      </p>
+      <p>Get the most popular tracks uploaded or favorited by the people you follow on Soundcloud.</p>
+      
+      <section class="jumbotron-section">
+        <p>Enter someone's Soundcloud username to see their popular music:</p>
+        <form name="soundcloudSearch" ng-submit="observeUser()">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
+            <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
+              <span ng-hide="messages.userNotFound"><i class="fa fa-search"></i></span>
+              <span ng-if="messages.userNotFound"><i class="fa fa-exclamation-triangle"></i> User not found!</span>
+            </span>
+          </div>
+        </form>
+      </section>
+
+      <section class="jumbotron-section">
+        <p>Or sign in to automatically get your popular music</p>
+        <p>
+          <button ng-click="login()" class="btn btn-primary btn-lg"><i class="fa fa-soundcloud"></i> Sign in</button>
+        </p>
+      </section>
+
     </div>
   </div>
 </div>

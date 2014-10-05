@@ -99,4 +99,14 @@ button.login-button {
   .search-alert {
     background-color: #d35400;
   }
+
+  section.jumbotron-section {
+    @include margin(null null 2em null);
+    @include padding(0.5em null null null);
+    border-top: 1px solid #bdc3c7;
+
+    &:last-child {
+      @include margin(null null 0 null);
+    }
+  }
 }
