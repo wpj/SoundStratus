@@ -85,9 +85,12 @@ angular.module('app.controllers', [])
 
     parseDataForFeedback = (data) ->
       unless data.length
-        $rootScope.messages.noDataFound = true
+        if username?
+          $rootScope.messages.noVicariousDataFound = true
+        else
+          $rootScope.messages.noDataFound = true
       else if data.length < 10
-        $rootScope.messages.follow = true
+        $rootScope.messages.follow = true unless username?
 
     if musicCache.cached
       $q.when(Soundcloud.filterByTime(musicCache.get(), timeframe.time))
