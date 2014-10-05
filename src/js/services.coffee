@@ -16,7 +16,7 @@ angular.module('app.services', [])
 
     # returns an array of user objects
     getFollowings = (user) ->
-      $http.get("#{soundcloudUrl}users/#{user}/followings.json",params: params)
+      $http.get("#{soundcloudUrl}users/#{user}/followings.json", params: params)
       .then (data) -> data.data
 
     parseFollowings = (followingUser) ->
@@ -55,9 +55,13 @@ angular.module('app.services', [])
         .first 10
         .value()
 
+    checkUser = (username) ->
+      $http.get "#{soundcloudUrl}users/#{username}", params: params
+
     return {
       parseUser: parseUser
       filterByTime: filterByTime
+      checkUser: checkUser
     }
 ]
 
