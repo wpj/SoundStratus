@@ -13,7 +13,9 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
             <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
-              <span ng-hide="messages.userNotFound"><i class="fa fa-search"></i></span>
+              <span ng-hide="messages.userNotFound">
+                <i class="fa fa-search" ng-class="{'fa-spin': processing}"></i>
+              </span>
               <span ng-if="messages.userNotFound"><i class="fa fa-exclamation-triangle"></i> User not found!</span>
             </span>
           </div>
@@ -30,7 +32,9 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
             <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
-              <span ng-hide="messages.userNotFound"><i class="fa fa-search"></i></span>
+              <span ng-hide="messages.userNotFound">
+                <i class="fa fa-search" ng-class="{'fa-spin': processing}"></i>
+              </span>
               <span ng-if="messages.userNotFound"><i class="fa fa-exclamation-triangle"></i> User not found!</span>
             </span>
           </div>
