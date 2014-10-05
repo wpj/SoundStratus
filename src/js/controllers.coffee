@@ -55,6 +55,20 @@ angular.module('app.controllers', [])
         .catch (error) -> $rootScope.messages.error = true
 ]
 
+.controller 'HomeCtrl',
+  ['$rootScope', '$scope', '$timeout', '$state', 'Soundcloud',
+  ($rootScope, $scope, $timeout, $state, Soundcloud) ->
+    $scope.observeUser = ->
+      if $scope.soundcloudUsername?
+        Soundcloud.checkUser $scope.soundcloudUsername
+          .then -> $state.go 'trending.week', user: $scope.soundcloudUsername
+          .catch ->
+            $rootScope.messages.userNotFound = true
+            $timeout ->
+              $rootScope.messages.userNotFound = false
+            , 1500
+]
+
 .controller 'NavCtrl',
   ['$rootScope', '$scope', '$state', 'flash', 'username',
   ($rootScope, $scope, $state, flash, username) ->
