@@ -54,6 +54,20 @@ angular.module('app.controllers', [])
         .then (response) -> $scope.user = response.data
         .catch (error) -> $rootScope.messages.error = true
 
+    # $scope.observeUser = ->
+    #   if $scope.soundcloudUsername?
+    #     Soundcloud.checkUser $scope.soundcloudUsername
+    #       .then -> $state.go 'trending.week', user: $scope.soundcloudUsername
+    #       .catch ->
+    #         $rootScope.messages.userNotFound = true
+    #         $timeout ->
+    #           $rootScope.messages.userNotFound = false
+    #         , 1500
+]
+
+.controller 'HomeCtrl',
+  ['$rootScope', '$scope', '$timeout', '$state', 'Soundcloud',
+  ($rootScope, $scope, $timeout, $state, Soundcloud) ->
     $scope.observeUser = ->
       if $scope.soundcloudUsername?
         Soundcloud.checkUser $scope.soundcloudUsername
