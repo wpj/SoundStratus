@@ -21,6 +21,8 @@ angular.module('app.controllers', [])
     $scope.iosLogin = true if isIos() and window.opener
 
     $scope.login = ->
+      $location.path '/'
+      $location.search 'user', null
       if isIos()
         $window.addEventListener 'focus', ->
           unless $scope.authenticating
