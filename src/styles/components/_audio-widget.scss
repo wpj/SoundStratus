@@ -1,5 +1,17 @@
 $player-color: #2c3e50;
 
+@mixin tint-background-color-gradient($percent) {
+  .song-info {
+    background-color: tint($player-color, $percent);
+  }
+}
+
+@mixin shade-background-color-gradient($percent) {
+  .song-info {
+    background-color: shade($player-color, $percent);
+  }
+}
+
 ul.popular-list {
   h4 {
     text-transform: uppercase;
@@ -10,43 +22,43 @@ ul.popular-list {
     @include margin(null null 1em null);
 
     &:nth-child(2) {
-      background-color: tint($player-color, 16%);
+      @include tint-background-color-gradient(16%);
     }
 
     &:nth-child(3) {
-      background-color: tint($player-color, 12%);
+      @include tint-background-color-gradient(12%);
     }
 
     &:nth-child(4) {
-      background-color: tint($player-color, 8%);
+      @include tint-background-color-gradient(8%);
     }
 
     &:nth-child(5) {
-      background-color: tint($player-color, 4%);
+      @include tint-background-color-gradient(4%);
     }
 
     &:nth-child(6) {
-      background-color: $player-color;
+      @include tint-background-color-gradient(0%);
     }
 
     &:nth-child(7) {
-      background-color: shade($player-color, 4%);
+      @include shade-background-color-gradient(4%);
     }
 
     &:nth-child(8) {
-      background-color: shade($player-color, 8%);
+      @include shade-background-color-gradient(8%);
     }
 
     &:nth-child(9) {
-      background-color: shade($player-color, 16%);
+      @include shade-background-color-gradient(12%);
     }
 
     &:nth-child(10) {
-      background-color: shade($player-color, 20%);
+      @include shade-background-color-gradient(16%);
     }
 
     &:nth-child(11) {
-      background-color: shade($player-color, 24%);
+      @include shade-background-color-gradient(20%);
     }
   }
 
