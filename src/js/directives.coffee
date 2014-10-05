@@ -40,7 +40,9 @@ angular.module('app.directives', [])
 
       pause: ->
         $interval.cancel @interval
-        @audio.controls.pause()
+        # use ? to handle if player is being destroyed before
+        # @audio.controls is defined
+        @audio.controls?.pause()
         scope.playing = false
 
       seek: (e) ->
