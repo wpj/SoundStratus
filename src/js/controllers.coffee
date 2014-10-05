@@ -61,9 +61,7 @@ angular.module('app.controllers', [])
     $scope.activeTab = (tab) ->
       tab == $state.current.name
     # $rootScope.messages.hasFlash = not flash.enabled
-
-    console.log username
-
+    
     if username
       $scope.user =
         username: username
