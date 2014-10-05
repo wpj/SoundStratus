@@ -76,6 +76,9 @@ angular.module('app.services', [])
       musicCache = cache
       @cached = true
     cached: false
+    clear: ->
+      musicCache = []
+      @cached = false
   }
 
 .factory 'flash', ->
