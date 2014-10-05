@@ -10,13 +10,27 @@ angular.module('cirrusSounds',
         templateUrl: 'home.html'
 
       .state 'trending',
-        url: '/popular'
+        url: '/popular?user'
         templateUrl: 'trending.html'
         abstract: true
         controller: 'NavCtrl'
-        onEnter: ['$state', '$auth', ($state, $auth) ->
-          $state.go('home') unless $auth.isAuthenticated()
-        ]
+        resolve: 
+          username: 
+            ['$stateParams', ($stateParams) ->
+              $stateParams.user if $stateParams.user
+            ]
+        onEnter: 
+          ['$state', '$auth', '$stateParams', 'musicCache',
+          ($state, $auth, $stateParams, musicCache) ->
+            if $stateParams.user
+              musicCache.clear()
+            else
+              $state.go('home') unless $auth.isAuthenticated()
+          ]
+        onExit:
+          ['$stateParams', 'musicCache', ($stateParams, musicCache) ->
+            musicCache.clear() if $stateParams.user
+          ]
 
       .state 'trending.today',
         url: '/today'

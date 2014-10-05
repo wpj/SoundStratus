@@ -1,8 +1,8 @@
 angular.module('app.controllers', [])
 
 .controller 'MainCtrl',
-  ['$rootScope', '$scope', '$window', '$auth', 'Account', '$state',
-  ($rootScope, $scope, $window, $auth, Account, $state) ->
+  ['$rootScope', '$scope', '$location', '$window', '$auth', 'Account', '$state',
+  ($rootScope, $scope, $location, $window, $auth, Account, $state) ->
     
     $scope.authenticating = false
     $scope.iosLogin = false
@@ -42,7 +42,9 @@ angular.module('app.controllers', [])
 
     $scope.logout = ->
       $auth.logout()
-        .then -> $scope.user = null
+        .then ->
+          $scope.user = null
+          $location.search 'user', null
 
     $scope.isAuthenticated = ->
       $auth.isAuthenticated()
@@ -54,15 +56,22 @@ angular.module('app.controllers', [])
 ]
 
 .controller 'NavCtrl',
-  ['$rootScope', '$scope', '$state', 'flash', ($rootScope, $scope, $state, flash) ->
+  ['$rootScope', '$scope', '$state', 'flash', 'username',
+  ($rootScope, $scope, $state, flash, username) ->
     $scope.activeTab = (tab) ->
       tab == $state.current.name
     # $rootScope.messages.hasFlash = not flash.enabled
+
+    console.log username
+
+    if username
+      $scope.user =
+        username: username
 ]
 
 .controller 'TrendingCtrl',
-  ['$rootScope', '$scope', '$q', 'Soundcloud', 'musicCache', 'timeframe',
-  ($rootScope, $scope, $q, Soundcloud, musicCache, timeframe) ->
+  ['$rootScope', '$scope', '$q', 'Soundcloud', 'musicCache', 'timeframe', 'username',
+  ($rootScope, $scope, $q, Soundcloud, musicCache, timeframe, username) ->
     
     $scope.showLoading = false
 
@@ -84,10 +93,9 @@ angular.module('app.controllers', [])
           $rootScope.messages.error = true
     else
       $scope.showLoading = true
-      $scope.getProfile()
-        .then (user) ->
-          Soundcloud.parseUser(user.uid)
 
+      parseUser = (user) ->
+        Soundcloud.parseUser(user)
         .then (songs) ->
           $scope.showLoading = false
           musicCache.set songs
@@ -100,6 +108,12 @@ angular.module('app.controllers', [])
         .catch (error) ->
           $scope.showLoading = false
           $rootScope.messages.error = true
+
+
+      unless username
+        $scope.getProfile().then (user) -> parseUser(user.uid)
+      else
+        parseUser($scope.user.username)
 
     $scope.$on '$destroy', ->
       $scope.songs = null
