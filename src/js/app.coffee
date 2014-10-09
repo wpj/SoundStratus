@@ -10,6 +10,10 @@ angular.module('cirrusSounds',
         templateUrl: 'home.html'
         controller: 'HomeCtrl'
 
+      .state 'about',
+        url: '/about'
+        templateUrl: 'about.html'
+
       .state 'trending',
         url: '/popular?user'
         templateUrl: 'trending.html'
