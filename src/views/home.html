@@ -11,7 +11,7 @@
         <p>Or enter someone's Soundcloud username to see their popular music:</p>
         <form name="soundcloudSearch" ng-submit="observeUser()">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
+            <input type="text" class="form-control" ng-model="soundcloudUsername" required>
             <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
               <span ng-hide="messages.userNotFound">
                 <i class="fa fa-search" ng-class="{'fa-spin': processing}"></i>
@@ -30,7 +30,7 @@
         <p>Enter someone's Soundcloud username to see their popular music:</p>
         <form name="soundcloudSearch" ng-submit="observeUser()">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Soundcloud username" ng-model="soundcloudUsername" required>
+            <input type="text" class="form-control" ng-model="soundcloudUsername" required>
             <span ng-click="observeUser()" class="input-group-addon search-button" ng-class="{'search-alert': messages.userNotFound}">
               <span ng-hide="messages.userNotFound">
                 <i class="fa fa-search" ng-class="{'fa-spin': processing}"></i>
