@@ -17,6 +17,7 @@ angular.module('app.directives', [])
           error: false
         scope.loadingSong = true
         SC.stream "/tracks/#{attrs.musicPlayer}", (player) =>
+          # @audio.error = true unless player?
           scope.loadingsong = false
           @audio.controls = player
           
