@@ -65,25 +65,19 @@ angular.module('app.services', [])
     }
 ]
 
-.factory 'Account',
-  ['$http', ($http) ->
-    
-    get: -> $http.get '/api/me'
-]
+.factory 'Account', ['$http', ($http) -> get: -> $http.get '/api/me']
 
 .factory 'musicCache', ->
   musicCache = []
 
-  return {
-    get: -> musicCache
-    set: (cache) ->
-      musicCache = cache
-      @cached = true
-    cached: false
-    clear: ->
-      musicCache = []
-      @cached = false
-  }
+  get: -> musicCache
+  set: (cache) ->
+    musicCache = cache
+    @cached = true
+  cached: false
+  clear: ->
+    musicCache = []
+    @cached = false
 
 .factory 'flash', ->
   enabled: false
