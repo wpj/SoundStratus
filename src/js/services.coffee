@@ -10,28 +10,63 @@ angular.module('app.services', [])
     params = client_id: clientId
 
     parseUser = (user) ->
-      getFollowings user
-        .then (followedUsers) -> parseFollowings followedUsers
-        .then (followingUserTracks) -> parseTracks _.flatten(followingUserTracks)
+      getFollowingsCount user
+        .then (followingsCount) -> getFollowings user, followingsCount
+        .then (followedUsers) -> parseFollowings _.flatten followedUsers
+        .then (followingUserTracks) -> parseTracks followingUserTracks
 
-    # returns an array of user objects
-    getFollowings = (user) ->
-      $http.get("#{soundcloudUrl}users/#{user}/followings.json", params: params)
-      .then (data) -> data.data
+    getFollowingsCount = (user) ->
+      $http.get "#{soundcloudUrl}users/#{user}.json", params: params
+        .then (response) ->
+          response.data.followings_count
+
+    # returns an array of arrays of user objects (needs to be flattened to use)
+    getFollowings = (user, followingsCount) ->
+      $q.all do ->
+        for x in [0..followingsCount] by 200
+          $http.get "#{soundcloudUrl}users/#{user}/followings.json",
+            params:
+              client_id: clientId
+              limit: 200
+              offset: x
+          .then (data) ->
+            data.data
+
+    getTracksInfo = (user) ->
+      $http.get "#{soundcloudUrl}users/#{user}.json", params: params
+        .then (response) ->
+          trackCount: response.data.track_count
+          favoriteCount: response.data.public_favorites_count
 
     parseFollowings = (followingUser) ->
-      $q.all _.map(followingUser, (following) -> getTracks following.id)
+      $q.all _.map followingUser, (following) ->
+        getTracksInfo following.id
+        .then (data) -> getTracks following.id, data.trackCount, data.favoriteCount
 
-    getTracks = (user) ->
+    getTracks = (user, trackCount, favoriteCount) ->
       $q.all [
-        $http.get("#{soundcloudUrl}users/#{user}/favorites.json", params: params)
-        $http.get("#{soundcloudUrl}users/#{user}/tracks.json", params: params)
+        $q.all do ->
+          for x in [0..favoriteCount] by 200
+            $http.get "#{soundcloudUrl}users/#{user}/favorites.json",
+              params:
+                client_id: clientId
+                limit: 200
+                offset: x
+            .then (data) -> data.data
+
+        $q.all do ->
+          for x in [0..trackCount] by 200
+            $http.get "#{soundcloudUrl}users/#{user}/tracks.json", 
+              params:
+                client_id: clientId
+                limit: 200
+                offset: x
+            .then (data) -> data.data
       ]
 
     parseTracks = (followingUserTracks) ->
       # returns a Lodash object (array) of song objects
       _(followingUserTracks)
-        .map (tracks) -> tracks.data if tracks.data
         .flatten()
         .reject (track) -> !track.playback_count
         .uniq 'id'
