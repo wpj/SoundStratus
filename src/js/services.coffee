@@ -15,54 +15,101 @@ angular.module('app.services', [])
         .then (followedUsers) -> parseFollowings _.flatten followedUsers
         .then (followingUserTracks) -> parseTracks followingUserTracks
 
+    # parseUser constituent functions
     getFollowingsCount = (user) ->
-      $http.get "#{soundcloudUrl}users/#{user}.json", params: params
-        .then (response) ->
-          response.data.followings_count
+      counter = 0
+      deferred = $q.defer()
+
+      getFollowingsCountFn = ->
+        $http.get "#{soundcloudUrl}users/#{user}.json", params: params
+          .then (response) -> deferred.resolve response.data.followings_count
+          .catch (error) ->
+            counter += 1
+            if counter < 3 then getFollowingsCountFn()
+            else deferred.reject error
+
+      getFollowingsCountFn()
+      deferred.promise
 
     # returns an array of arrays of user objects (needs to be flattened to use)
     getFollowings = (user, followingsCount) ->
-      $q.all do ->
-        for x in [0..followingsCount] by 200
-          $http.get "#{soundcloudUrl}users/#{user}/followings.json",
-            params:
-              client_id: clientId
-              limit: 200
-              offset: x
-          .then (data) ->
-            data.data
+      counter = 0
+      deferred = $q.defer()
+
+      getFollowingsFn = ->
+        $q.all do ->
+          for x in [0..followingsCount] by 200
+            $http.get "#{soundcloudUrl}users/#{user}/followings.json",
+              params:
+                client_id: clientId
+                limit: 200
+                offset: x
+            .then (data) ->
+              data.data
+        .then (data) -> deferred.resolve data
+        .catch (error) ->
+          counter += 1
+          if counter < 3 then getFollowingsFn()
+          else deferred.reject error
+
+      getFollowingsFn()
+      deferred.promise
 
     getTracksInfo = (user) ->
-      $http.get "#{soundcloudUrl}users/#{user}.json", params: params
-        .then (response) ->
-          trackCount: response.data.track_count
-          favoriteCount: response.data.public_favorites_count
+      counter = 0
+      deferred = $q.defer()
+
+      getTracksInfoFn = ->
+        $http.get "#{soundcloudUrl}users/#{user}.json", params: params
+          .then (response) ->
+            deferred.resolve
+              trackCount: response.data.track_count
+              favoriteCount: response.data.public_favorites_count
+          .catch (error) ->
+            counter += 1
+            if counter < 3 then getTracksInfoFn()
+            else deferred.reject error
+
+      getTracksInfoFn()
+      deferred.promise
+
+    getTracks = (user, trackCount, favoriteCount) ->
+      counter = 0
+      deferred = $q.defer()
+
+      getTracksFn = ->
+        $q.all [
+          $q.all do ->
+            for x in [0..favoriteCount] by 200
+              $http.get "#{soundcloudUrl}users/#{user}/favorites.json",
+                params:
+                  client_id: clientId
+                  limit: 200
+                  offset: x
+              .then (data) -> data.data
+
+          $q.all do ->
+            for x in [0..trackCount] by 200
+              $http.get "#{soundcloudUrl}users/#{user}/tracks.json", 
+                params:
+                  client_id: clientId
+                  limit: 200
+                  offset: x
+              .then (data) -> data.data
+        ]
+        .then (data) -> deferred.resolve data
+        .catch (error) ->
+          counter += 1
+          if counter < 3 then getTracksFn()
+          else deferred.reject error
+      
+      getTracksFn()
+      deferred.promise
 
     parseFollowings = (followingUser) ->
       $q.all _.map followingUser, (following) ->
         getTracksInfo following.id
         .then (data) -> getTracks following.id, data.trackCount, data.favoriteCount
-
-    getTracks = (user, trackCount, favoriteCount) ->
-      $q.all [
-        $q.all do ->
-          for x in [0..favoriteCount] by 200
-            $http.get "#{soundcloudUrl}users/#{user}/favorites.json",
-              params:
-                client_id: clientId
-                limit: 200
-                offset: x
-            .then (data) -> data.data
-
-        $q.all do ->
-          for x in [0..trackCount] by 200
-            $http.get "#{soundcloudUrl}users/#{user}/tracks.json", 
-              params:
-                client_id: clientId
-                limit: 200
-                offset: x
-            .then (data) -> data.data
-      ]
 
     parseTracks = (followingUserTracks) ->
       # returns a Lodash object (array) of song objects
@@ -70,7 +117,10 @@ angular.module('app.services', [])
         .flatten()
         .reject (track) -> !track.playback_count
         .uniq 'id'
+    
+    # end parseUser constituent functions
 
+    
     filterByTime = (tracks, time) ->
       date = new Date()
 
