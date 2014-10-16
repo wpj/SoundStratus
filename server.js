@@ -1,15 +1,15 @@
-var path       = require('path');
-var qs         = require('querystring');
+var path        = require('path');
+var qs          = require('querystring');
 
-var bcrypt     = require('bcryptjs');
-var bodyParser = require('body-parser');
-var express    = require('express');
-var logger     = require('morgan');
-var jwt        = require('jwt-simple');
-var moment     = require('moment');
-var mongoose   = require('mongoose');
-var request    = require('request');
-
+var bcrypt      = require('bcryptjs');
+var bodyParser  = require('body-parser');
+var express     = require('express');
+var logger      = require('morgan');
+var jwt         = require('jwt-simple');
+var moment      = require('moment');
+var mongoose    = require('mongoose');
+var request     = require('request');
+var compression = require('compression');
 
 var config     = require('./config');
 
@@ -38,6 +38,7 @@ if (app.get('env') === 'production') {
   });
 }
 
+app.use(compression());
 app.use(express.static(path.join(__dirname, './public')));
 
 
